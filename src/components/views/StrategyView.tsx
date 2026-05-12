@@ -79,7 +79,7 @@ const StrategyView = () => {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
               <XAxis dataKey="segment" stroke="#94a3b8" tick={{ fontSize: 10 }} angle={-20} textAnchor="end" interval={0} />
               <YAxis stroke="#94a3b8" tickFormatter={v => `$${v}M`} tick={{ fontSize: 11 }} />
-              <Tooltip formatter={(v: string | number) => [`$${Number(v)}M ARR`]} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
+              <Tooltip formatter={(v) => [`$${Number(v ?? 0)}M ARR`]} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
               <Legend iconSize={10} formatter={(v) => <span style={{ fontSize: 11 }}>{v === 'y2026' ? '2026E' : '2028E'}</span>} />
               <Bar dataKey="y2026" name="y2026" fill="#93c5fd" radius={[4, 4, 0, 0]} />
               <Bar dataKey="y2028" name="y2028" fill="#2563eb" radius={[4, 4, 0, 0]} />

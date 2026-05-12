@@ -254,9 +254,10 @@ const MarketAnalysisView = () => {
                 width={145}
               />
               <Tooltip
-                formatter={(v: number) => {
-                  const item = verticalGrowthData.find(d => d.cagr === v);
-                  return [`${v}%${item?.estimated ? ' (Est.)' : ''}`, 'CAGR'];
+                formatter={(v: string | number | readonly (string | number)[] | undefined) => {
+                  const num = typeof v === 'number' ? v : undefined;
+                  const item = num !== undefined ? verticalGrowthData.find(d => d.cagr === num) : undefined;
+                  return [`${num ?? v}%${item?.estimated ? ' (Est.)' : ''}`, 'CAGR'];
                 }}
                 contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }}
               />

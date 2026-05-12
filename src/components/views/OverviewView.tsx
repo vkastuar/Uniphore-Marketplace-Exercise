@@ -1,11 +1,16 @@
 import './views.css';
-import { Shield, AlertTriangle, TrendingUp, Zap, Users2, Building2, DollarSign } from 'lucide-react';
+import { Shield, AlertTriangle, TrendingUp, Zap } from 'lucide-react';
 
-const stats = [
-  { value: '$2.5B', label: 'Valuation', sub: 'Series F · Oct 2025', icon: DollarSign, iconBg: 'bg-blue-50', iconColor: 'text-blue-600' },
-  { value: '~$1B', label: 'Total Funding', sub: 'NVIDIA, AMD, Snowflake backers', icon: TrendingUp, iconBg: 'bg-indigo-50', iconColor: 'text-indigo-600' },
-  { value: '2,000+', label: 'Global Enterprises', sub: 'Including Fortune 500', icon: Building2, iconBg: 'bg-emerald-50', iconColor: 'text-emerald-600' },
-  { value: '873', label: 'Employees Globally', sub: 'Palo Alto & Chennai HQ', icon: Users2, iconBg: 'bg-amber-50', iconColor: 'text-amber-600' },
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
+const tocItems = [
+  { id: 'company',   label: 'Company Overview',              desc: 'About Uniphore and the Business AI Cloud' },
+  { id: 'platform',  label: 'Platform Architecture',         desc: 'Four composable layers enabling sovereign AI' },
+  { id: 'state',     label: 'State of the Platform',         desc: 'Current lifecycle phase and developer reality' },
+  { id: 'personas',  label: 'Key Buyer Personas',            desc: 'The three primary enterprise buyer profiles' },
+  { id: 'swot',      label: 'SWOT Analysis',                 desc: 'Competitive position assessment for the BCAI platform' },
 ];
 
 const swotData = [
@@ -109,52 +114,45 @@ const OverviewView = () => {
         <p className="view-subtitle">Platform assessment, SWOT analysis, and the state of the platform and its users as of 2026.</p>
       </div>
 
-      {/* Stat cards */}
-      <div className="grid grid-cols-4 gap-5">
-        {stats.map((s) => {
-          const Icon = s.icon;
-          return (
-            <div key={s.label} className="glass-panel p-6 text-center">
-              <div className={`inline-flex p-3 rounded-xl mb-3 ${s.iconBg} ${s.iconColor}`}>
-                <Icon size={22} strokeWidth={2} />
-              </div>
-              <div className="text-3xl font-black text-primary">{s.value}</div>
-              <div className="text-sm font-bold text-primary mt-1">{s.label}</div>
-              <div className="text-xs text-muted mt-1">{s.sub}</div>
-            </div>
-          );
-        })}
+      {/* 1. Company Overview */}
+      <div id="company" className="glass-panel p-8 flex items-start gap-8">
+        {/* Logo mark */}
+        <div className="shrink-0 flex flex-col items-center gap-2">
+          <div className="w-16 h-16 bg-accent-primary rounded-2xl flex items-center justify-center shadow-md">
+            <span className="text-white font-black text-3xl" style={{ fontFamily: 'system-ui', letterSpacing: '-1px' }}>U</span>
+          </div>
+          <span className="text-xs font-bold text-primary tracking-wide">Uniphore</span>
+        </div>
+        {/* Text */}
+        <p className="text-base text-primary leading-relaxed" style={{ maxWidth: 760 }}>
+          Uniphore is a global, privately-held software company specializing in enterprise-grade artificial intelligence, specifically focusing on <strong>"Business AI"</strong> and agentic AI platforms. Uniphore has evolved from an early pioneer in conversational AI into a comprehensive AI platform provider. The <strong>Business AI Cloud</strong> platform was launched in June 2025.
+        </p>
       </div>
 
-      {/* SWOT 2x2 */}
+      {/* 2. Table of Contents */}
       <div className="glass-panel p-8">
-        <h3 className="text-xl font-bold mb-1 text-primary">SWOT Analysis — Business AI Cloud Platform</h3>
-        <p className="text-sm text-muted mb-6">Honest assessment of Uniphore's competitive position heading into 2026.</p>
-        <div className="grid grid-cols-2 gap-4">
-          {swotData.map((q) => {
-            const Icon = q.icon;
-            return (
-              <div key={q.key} className={`rounded-xl border-t-4 ${q.borderColor} p-6 ${q.bg}`}>
-                <div className={`flex items-center gap-2 mb-4 ${q.iconColor}`}>
-                  <Icon size={18} strokeWidth={2.5} />
-                  <span className="font-bold text-sm uppercase tracking-wider">{q.title}</span>
-                </div>
-                <ul className="space-y-2">
-                  {q.items.map((item, i) => (
-                    <li key={i} className="flex gap-2 text-sm text-slate-700 leading-snug">
-                      <span className="mt-1 shrink-0 text-slate-400">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+        <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
+        <div className="flex flex-col divide-y divide-slate-100">
+          {tocItems.map((item, i) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="flex items-center gap-4 py-3 text-left hover:bg-slate-50 rounded-lg px-2 transition-colors group"
+            >
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 group-hover:bg-accent-primary group-hover:text-white transition-colors">
+                {i + 1}
+              </span>
+              <div>
+                <span className="text-sm font-semibold text-accent-primary group-hover:underline">{item.label}</span>
+                <span className="text-xs text-muted ml-2">— {item.desc}</span>
               </div>
-            );
-          })}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Platform architecture + State */}
-      <div className="grid-2">
+      {/* 3. Platform Architecture + State of Platform */}
+      <div id="platform" className="grid-2">
         <div className="glass-panel p-8">
           <h3 className="text-xl font-bold text-primary mb-2">Business AI Cloud Architecture</h3>
           <p className="text-sm text-muted mb-5">Four composable layers enabling sovereign enterprise AI.</p>
@@ -171,7 +169,7 @@ const OverviewView = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5">
+        <div id="state" className="flex flex-col gap-5">
           <div className="glass-panel p-8">
             <h3 className="text-xl font-bold text-primary mb-4">State of the Platform</h3>
             <div className="space-y-3">
@@ -186,16 +184,6 @@ const OverviewView = () => {
                   <span className="text-sm text-muted">{item.label}</span>
                   <span className={`text-xs font-bold px-3 py-1 rounded-full ${item.tag}`}>{item.value}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="glass-panel p-8">
-            <h3 className="text-xl font-bold text-primary mb-1">Strategic Investors</h3>
-            <p className="text-sm text-muted mb-4">Financial and ecosystem validation from AI infrastructure leaders.</p>
-            <div className="flex flex-wrap gap-2">
-              {['NVIDIA', 'AMD', 'Snowflake', 'Databricks', 'NEA', 'March Capital'].map(inv => (
-                <span key={inv} className="px-3 py-1.5 bg-slate-100 border border-slate-200 text-slate-700 rounded-full text-sm font-semibold">{inv}</span>
               ))}
             </div>
           </div>
@@ -219,8 +207,8 @@ const OverviewView = () => {
         </div>
       </div>
 
-      {/* Personas */}
-      <div className="glass-panel p-8">
+      {/* 4. Personas */}
+      <div id="personas" className="glass-panel p-8">
         <h3 className="text-xl font-bold text-primary mb-2">Key Buyer Personas</h3>
         <p className="text-sm text-muted mb-6">The Business AI Cloud shifts the buyer from VP Customer Service to enterprise technology and operations leaders.</p>
         <div className="grid grid-cols-3 gap-6">
@@ -240,6 +228,33 @@ const OverviewView = () => {
               </ul>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* 5. SWOT */}
+      <div id="swot" className="glass-panel p-8">
+        <h3 className="text-xl font-bold mb-1 text-primary">SWOT Analysis — Business AI Cloud Platform</h3>
+        <p className="text-sm text-muted mb-6">Assessment of Uniphore's competitive position heading into 2026.</p>
+        <div className="grid grid-cols-2 gap-4">
+          {swotData.map((q) => {
+            const Icon = q.icon;
+            return (
+              <div key={q.key} className={`rounded-xl border-t-4 ${q.borderColor} p-6 ${q.bg}`}>
+                <div className={`flex items-center gap-2 mb-4 ${q.iconColor}`}>
+                  <Icon size={18} strokeWidth={2.5} />
+                  <span className="font-bold text-sm uppercase tracking-wider">{q.title}</span>
+                </div>
+                <ul className="space-y-2">
+                  {q.items.map((item, i) => (
+                    <li key={i} className="flex gap-2 text-sm text-slate-700 leading-snug">
+                      <span className="mt-1 shrink-0 text-slate-400">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

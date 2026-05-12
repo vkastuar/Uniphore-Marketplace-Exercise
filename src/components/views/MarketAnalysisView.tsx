@@ -1,8 +1,8 @@
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, AreaChart, Area, Legend,
+  AreaChart, Area, Cell,
 } from 'recharts';
-import { TrendingUp, ServerCrash, Lock, Workflow } from 'lucide-react';
+import { TrendingUp, ServerCrash, Lock, Workflow, ExternalLink } from 'lucide-react';
 import './views.css';
 
 const marketData = [
@@ -14,18 +14,18 @@ const marketData = [
   { year: '2030', size: 50 },
 ];
 
-const adoptionData = [
-  { name: 'Scaled to Production', value: 11, color: '#2563eb' },
-  { name: 'Experimenting / Stuck', value: 51, color: '#93c5fd' },
-  { name: 'Not Yet Started', value: 38, color: '#e2e8f0' },
+const adoptionBars = [
+  { label: 'Use AI in some capacity', pct: 88, color: '#93c5fd', source: 'https://kpmg.com/us/en/articles/2025/ai-quarterly-pulse-survey.html', sourceLabel: 'KPMG AI Pulse Survey' },
+  { label: 'Experimenting with agents', pct: 62, color: '#3b82f6', source: 'https://www.marketsandmarkets.com/Market-Reports/ai-agents-market-15761548.html', sourceLabel: 'MarketsandMarkets' },
+  { label: 'Scaled agents to production', pct: 11, color: '#1e40af', source: 'https://kpmg.com/us/en/articles/2025/ai-quarterly-pulse-survey.html', sourceLabel: 'KPMG AI Pulse Survey' },
 ];
 
 const verticalGrowthData = [
-  { vertical: 'Vertical AI Agents', cagr: 62 },
-  { vertical: 'Multi-Agent Systems', cagr: 48.5 },
-  { vertical: 'Enterprise AI Overall', cagr: 43 },
-  { vertical: 'SLM Adoption', cagr: 38 },
-  { vertical: 'Gen AI Copilots', cagr: 28 },
+  { vertical: 'Vertical AI Agents', cagr: 62, estimated: false },
+  { vertical: 'Multi-Agent Systems', cagr: 48.5, estimated: false },
+  { vertical: 'Enterprise AI Overall', cagr: 43, estimated: false },
+  { vertical: 'SLM Adoption', cagr: 38, estimated: true },
+  { vertical: 'Gen AI Copilots', cagr: 28, estimated: true },
 ];
 
 const trends = [
@@ -35,6 +35,8 @@ const trends = [
     cagr: 'Multi-agent: ~48.5% CAGR',
     cagrBg: 'bg-indigo-100 text-indigo-700',
     desc: 'The market is rapidly moving past reactive chatbots toward proactive, multi-agent, BPMN-orchestrated systems capable of autonomous, multi-step back-office execution. Platforms must have robust orchestration, not just LLM wrappers.',
+    source: 'https://www.marketsandmarkets.com/Market-Reports/ai-agents-market-15761548.html',
+    sourceLabel: 'MarketsandMarkets AI Agents Report',
   },
   {
     icon: ServerCrash, color: 'text-red-500', border: 'border-t-red-500', bg: 'bg-red-50',
@@ -42,6 +44,8 @@ const trends = [
     cagr: 'SLM adoption accelerating',
     cagrBg: 'bg-red-100 text-red-700',
     desc: 'Scaling billions of routine LLM API calls is economically unviable. Enterprises are pivoting to SLMs fine-tuned on proprietary data. Uniphore\'s native SLM Factory directly solves this — delivering 10x lower TCO with higher accuracy.',
+    source: null,
+    sourceLabel: null,
   },
   {
     icon: Lock, color: 'text-emerald-600', border: 'border-t-emerald-500', bg: 'bg-emerald-50',
@@ -49,6 +53,8 @@ const trends = [
     cagr: '40% of projects at risk',
     cagrBg: 'bg-emerald-100 text-emerald-700',
     desc: 'Gartner estimates 40%+ of enterprise agentic AI projects will be cancelled by 2027 due to data governance gaps and IP leakage fears. Zero-copy and on-prem deployment are becoming non-negotiable table stakes — Uniphore\'s core strength.',
+    source: 'https://www.uctoday.com/unified-communications/gartner-predicts-40-of-enterprise-apps-will-feature-ai-agents-by-2026/',
+    sourceLabel: 'Gartner via UC Today',
   },
   {
     icon: TrendingUp, color: 'text-amber-600', border: 'border-t-amber-500', bg: 'bg-amber-50',
@@ -56,8 +62,22 @@ const trends = [
     cagr: 'Vertical agents: ~62% CAGR',
     cagrBg: 'bg-amber-100 text-amber-700',
     desc: 'Generic foundation models are proving insufficient for complex, regulated enterprise tasks. Domain-specific agents for BFSI, Healthcare, and Telecom see the fastest adoption — requiring an ecosystem marketplace no single vendor can staff alone.',
+    source: 'https://www.marketsandmarkets.com/Market-Reports/ai-agents-market-15761548.html',
+    sourceLabel: 'MarketsandMarkets AI Agents Report',
   },
 ];
+
+const SourceLink = ({ href, label }: { href: string; label: string }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 hover:underline mt-1"
+  >
+    <ExternalLink size={10} />
+    {label}
+  </a>
+);
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -82,15 +102,34 @@ const MarketAnalysisView = () => {
       {/* Key stats */}
       <div className="grid grid-cols-4 gap-5">
         {[
-          { value: '$11–12B', label: 'Market Size (2026E)', sub: 'Enterprise AI Agent market' },
-          { value: '~$50B', label: 'Projected (2030)', sub: '43–50% CAGR growth rate' },
-          { value: '11%', label: 'Scaled to Production', sub: 'Of enterprises using AI agents' },
-          { value: '40%', label: 'App Embed by 2026', sub: 'Gartner forecast (up from <5%)' },
+          {
+            value: '$11–12B', label: 'Market Size (2026E)', sub: 'Enterprise AI Agent market',
+            source: 'https://www.grandviewresearch.com/industry-analysis/ai-agents-market-report',
+            sourceLabel: 'Grand View Research',
+          },
+          {
+            value: '~$50B', label: 'Projected (2030)', sub: '43–50% CAGR growth rate',
+            source: 'https://www.prnewswire.com/news-releases/ai-agents-market-worth-52-62-billion-by-2030---exclusive-report-by-marketsandmarkets-302435486.html',
+            sourceLabel: 'MarketsandMarkets via PRNewswire',
+          },
+          {
+            value: '11%', label: 'Scaled to Production', sub: 'Of enterprises using AI agents',
+            source: 'https://kpmg.com/us/en/articles/2025/ai-quarterly-pulse-survey.html',
+            sourceLabel: 'KPMG AI Pulse Survey',
+          },
+          {
+            value: '40%', label: 'App Embed by 2026', sub: 'Gartner forecast (up from <5%)',
+            source: 'https://www.uctoday.com/unified-communications/gartner-predicts-40-of-enterprise-apps-will-feature-ai-agents-by-2026/',
+            sourceLabel: 'Gartner via UC Today',
+          },
         ].map(s => (
           <div key={s.label} className="glass-panel p-6 text-center">
             <div className="text-3xl font-black text-accent-primary">{s.value}</div>
             <div className="text-sm font-bold text-primary mt-2">{s.label}</div>
             <div className="text-xs text-muted mt-1">{s.sub}</div>
+            <div className="flex justify-center mt-2">
+              <SourceLink href={s.source} label={s.sourceLabel} />
+            </div>
           </div>
         ))}
       </div>
@@ -119,20 +158,29 @@ const MarketAnalysisView = () => {
 
         <div className="glass-panel p-8 flex flex-col">
           <h3 className="text-xl font-bold mb-1 text-primary">Adoption Reality Check</h3>
-          <p className="text-sm text-muted mb-6">Enterprise AI agent deployment status — why the gap is Uniphore's opportunity.</p>
-          <div className="flex justify-center" style={{ height: 200 }}>
-            <ResponsiveContainer width="100%" height={200}>
-              <PieChart>
-                <Pie data={adoptionData} cx="50%" cy="50%" innerRadius={65} outerRadius={90} paddingAngle={3} dataKey="value" stroke="none">
-                  {adoptionData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
-                </Pie>
-                <Legend iconType="circle" iconSize={10} formatter={(value) => <span style={{ fontSize: 12, color: '#64748b' }}>{value}</span>} />
-              </PieChart>
-            </ResponsiveContainer>
+          <p className="text-sm text-muted mb-5">These are independent survey figures — not parts of a whole. Each measures a different threshold of AI adoption.</p>
+          <div className="flex flex-col gap-5 flex-1 justify-center">
+            {adoptionBars.map((bar) => (
+              <div key={bar.label}>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-sm font-medium text-slate-700">{bar.label}</span>
+                  <span className="text-sm font-black" style={{ color: bar.color }}>{bar.pct}%</span>
+                </div>
+                <div className="w-full bg-slate-100 rounded-full h-3">
+                  <div
+                    className="h-3 rounded-full transition-all"
+                    style={{ width: `${bar.pct}%`, backgroundColor: bar.color }}
+                  />
+                </div>
+                <div className="mt-1">
+                  <SourceLink href={bar.source} label={bar.sourceLabel} />
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
+          <div className="mt-5 p-4 bg-blue-50 rounded-xl border border-blue-100">
             <p className="text-sm font-bold text-blue-800 mb-1">The 89% Opportunity</p>
-            <p className="text-sm text-blue-700 leading-relaxed">The vast majority of enterprises experimenting with agents are stuck at proof-of-concept. They're blocked by data sovereignty fears, infrastructure costs, and MLOps complexity — Uniphore's core differentiators solve all three.</p>
+            <p className="text-sm text-blue-700 leading-relaxed">Only 11% of enterprises have scaled AI agents to full production. The vast majority are blocked by data sovereignty fears, infrastructure costs, and MLOps complexity — Uniphore's core differentiators solve all three.</p>
           </div>
         </div>
       </div>
@@ -144,14 +192,28 @@ const MarketAnalysisView = () => {
           <p className="text-sm text-muted mb-6">Uniphore's layered market opportunity (2026 estimates)</p>
           <div className="space-y-4">
             {[
-              { label: 'TAM', value: '$50B+ (2030)', desc: 'Total enterprise AI agent platform market globally — all industries and use cases.', bg: 'bg-blue-900', width: 'w-full' },
-              { label: 'SAM', value: '$18B (2026)', desc: 'Regulated industries (BFSI, Telecom, Healthcare, Gov) requiring sovereign AI with on-prem deployment.', bg: 'bg-blue-600', width: 'w-3/4' },
-              { label: 'SOM', value: '$3.5B (2026)', desc: "Uniphore's 2,000+ BFSI/Telecom footprint — cross-sell Business AI Cloud into existing accounts.", bg: 'bg-blue-400', width: 'w-1/3' },
+              {
+                label: 'TAM', value: '$50B+ (2030)', desc: 'Total enterprise AI agent platform market globally — all industries and use cases.',
+                bg: 'bg-blue-900', width: 'w-full', estimated: false, valueClass: 'font-black text-white text-base',
+              },
+              {
+                label: 'SAM', value: '$18B (2026)', desc: 'Regulated industries (BFSI, Telecom, Healthcare, Gov) requiring sovereign AI with on-prem deployment.',
+                bg: 'bg-blue-600', width: 'w-3/4', estimated: true, valueClass: 'font-black text-white text-base',
+              },
+              {
+                label: 'SOM', value: '$3.5B (2026)', desc: "Uniphore's 2,000+ BFSI/Telecom footprint — cross-sell Business AI Cloud into existing accounts.",
+                bg: 'bg-blue-400', width: 'w-1/3', estimated: true, valueClass: 'font-bold text-white text-xs leading-tight',
+              },
             ].map(t => (
               <div key={t.label} className="space-y-2">
                 <div className={`${t.bg} ${t.width} rounded-lg px-4 py-3 flex items-center justify-between`}>
-                  <span className="font-bold text-white text-sm">{t.label}</span>
-                  <span className="font-black text-white">{t.value}</span>
+                  <span className="font-bold text-white text-sm shrink-0">{t.label}</span>
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    {t.estimated && (
+                      <span className="text-xs font-medium text-blue-200 bg-white/10 px-1.5 py-0.5 rounded shrink-0">Est.</span>
+                    )}
+                    <span className={`${t.valueClass} whitespace-nowrap`}>{t.value}</span>
+                  </div>
                 </div>
                 <p className="text-xs text-muted pl-2">{t.desc}</p>
               </div>
@@ -161,16 +223,52 @@ const MarketAnalysisView = () => {
 
         <div className="glass-panel p-8">
           <h3 className="text-xl font-bold mb-1 text-primary">Growth by Segment (CAGR)</h3>
-          <p className="text-sm text-muted mb-6">Vertical AI agents and multi-agent systems are the fastest-growing categories</p>
+          <p className="text-sm text-muted mb-1">Vertical AI agents and multi-agent systems are the fastest-growing categories</p>
+          <div className="flex items-center gap-3 mb-5">
+            <span className="inline-flex items-center gap-1 text-xs text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+              Top 3 sourced
+            </span>
+            <span className="inline-flex items-center gap-1 text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
+              Bottom 2 estimated
+            </span>
+            <SourceLink href="https://www.marketsandmarkets.com/Market-Reports/ai-agents-market-15761548.html" label="MarketsandMarkets" />
+          </div>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={verticalGrowthData} layout="vertical" margin={{ left: 10 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
               <XAxis type="number" stroke="#94a3b8" tickFormatter={v => `${v}%`} tick={{ fontSize: 11 }} />
-              <YAxis type="category" dataKey="vertical" stroke="#94a3b8" tick={{ fontSize: 11 }} width={140} />
-              <Tooltip formatter={(v) => [`${Number(v ?? 0)}%`, 'CAGR']} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
+              <YAxis
+                type="category"
+                dataKey="vertical"
+                stroke="#94a3b8"
+                tick={({ x, y, payload }: any) => {
+                  const item = verticalGrowthData.find(d => d.vertical === payload.value);
+                  return (
+                    <g transform={`translate(${x},${y})`}>
+                      <text x={-5} y={0} dy={4} textAnchor="end" fill={item?.estimated ? '#94a3b8' : '#475569'} fontSize={11}>
+                        {payload.value}
+                      </text>
+                    </g>
+                  );
+                }}
+                width={145}
+              />
+              <Tooltip
+                formatter={(v: number) => {
+                  const item = verticalGrowthData.find(d => d.cagr === v);
+                  return [`${v}%${item?.estimated ? ' (Est.)' : ''}`, 'CAGR'];
+                }}
+                contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }}
+              />
               <Bar dataKey="cagr" radius={[0, 6, 6, 0]}>
-                {verticalGrowthData.map((_, i) => (
-                  <Cell key={i} fill={i === 0 ? '#1e40af' : i === 1 ? '#2563eb' : i === 2 ? '#3b82f6' : '#60a5fa'} />
+                {verticalGrowthData.map((entry, i) => (
+                  <Cell
+                    key={i}
+                    fill={entry.estimated
+                      ? (i === 3 ? '#cbd5e1' : '#e2e8f0')
+                      : (i === 0 ? '#1e40af' : i === 1 ? '#2563eb' : '#3b82f6')
+                    }
+                  />
                 ))}
               </Bar>
             </BarChart>
@@ -194,7 +292,10 @@ const MarketAnalysisView = () => {
                   <Icon size={22} strokeWidth={2} />
                   <h4 className="font-bold text-primary text-base">{t.title}</h4>
                 </div>
-                <p className="text-sm text-muted leading-relaxed">{t.desc}</p>
+                <p className="text-sm text-muted leading-relaxed mb-3">{t.desc}</p>
+                {t.source && (
+                  <SourceLink href={t.source} label={t.sourceLabel!} />
+                )}
               </div>
             );
           })}

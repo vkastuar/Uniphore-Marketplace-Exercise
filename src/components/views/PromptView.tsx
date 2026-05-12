@@ -1,5 +1,4 @@
 import './views.css';
-import heroImg from '../../assets/hero.png';
 
 const PromptView = () => {
   return (
@@ -9,15 +8,7 @@ const PromptView = () => {
         <p className="view-subtitle">Uniphore Business AI Cloud Platform — Product Manager Exercise</p>
       </div>
 
-      {/* Hero image */}
       <div className="glass-panel overflow-hidden">
-        <img
-          src={heroImg}
-          alt="Uniphore Business AI Cloud"
-          className="w-full object-cover"
-          style={{ height: 280, objectPosition: 'center top' }}
-          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-        />
         <div className="p-8">
           <p className="text-lg mb-8 leading-relaxed text-primary max-w-4xl">
             As a B2B AI platform product manager for Uniphore's Business AI Cloud Platform, you need to determine <strong>whether or when you should introduce a marketplace</strong> as you expand the developer community adoption of the platform.
@@ -43,8 +34,7 @@ const PromptView = () => {
             <h4 className="text-sm font-bold uppercase tracking-wider text-accent-secondary mb-2">Extra Credit</h4>
             <div className="flex items-center gap-4 bg-indigo-50 px-5 py-4 rounded-xl border border-indigo-100">
               <div className="list-number" style={{ background: 'var(--accent-secondary)' }}>5</div>
-              <span className="font-semibold text-primary">Vibe code a UI/UX prototype of your MVP ✓</span>
-              <span className="ml-auto text-xs font-bold bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full">Complete</span>
+              <span className="font-semibold text-primary">Vibe code a UI/UX prototype of your MVP</span>
             </div>
           </div>
         </div>

@@ -167,7 +167,7 @@ const MarketAnalysisView = () => {
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
               <XAxis type="number" stroke="#94a3b8" tickFormatter={v => `${v}%`} tick={{ fontSize: 11 }} />
               <YAxis type="category" dataKey="vertical" stroke="#94a3b8" tick={{ fontSize: 11 }} width={140} />
-              <Tooltip formatter={(v: number) => [`${v}%`, 'CAGR']} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
+              <Tooltip formatter={(v: string | number) => [`${Number(v)}%`, 'CAGR']} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
               <Bar dataKey="cagr" radius={[0, 6, 6, 0]}>
                 {verticalGrowthData.map((_, i) => (
                   <Cell key={i} fill={i === 0 ? '#1e40af' : i === 1 ? '#2563eb' : i === 2 ? '#3b82f6' : '#60a5fa'} />

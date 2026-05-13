@@ -222,7 +222,8 @@ const MarketAnalysisView = () => {
       <div id="market-sizing" className="grid-2">
         <div className="glass-panel p-8">
           <h3 className="text-xl font-bold mb-1 text-primary">Addressable Market — TAM / SAM / SOM</h3>
-          <p className="text-sm text-muted mb-6">Uniphore's layered market opportunity (2026 estimates)</p>
+          <p className="text-sm text-muted mb-1">Uniphore's layered market opportunity (2026 estimates)</p>
+          <p className="text-xs text-slate-400 italic mb-5">* Rough estimates, need further validation</p>
           <div className="space-y-4">
             {[
               {

@@ -1,11 +1,57 @@
 import { Layers, Target, Star, Users, TrendingUp, Rocket, Building2, ChevronRight } from 'lucide-react';
 import './views.css';
 
+const personas = [
+  {
+    emoji: '👩‍💼',
+    title: 'CDAO / CISO',
+    role: 'Chief Data & AI Officer · Chief Information Security Officer',
+    bg: 'bg-indigo-50',
+    accent: 'text-indigo-700',
+    dot: 'bg-indigo-500',
+    priorities: [
+      'Sovereign AI — no cloud lock-in or IP leakage risk',
+      'Zero-copy architecture meets HIPAA, GDPR, FINRA mandates',
+      'SLM guardrails preventing hallucinations at scale',
+      'Enterprise audit trail & governance for compliance',
+    ],
+  },
+  {
+    emoji: '👨‍💻',
+    title: 'VP Enterprise Architecture',
+    role: 'Head of IT Automation · Enterprise Architect',
+    bg: 'bg-emerald-50',
+    accent: 'text-emerald-700',
+    dot: 'bg-emerald-500',
+    priorities: [
+      'Composability — plugs into existing enterprise stack seamlessly',
+      '10x lower TCO vs. hyperscaler LLM API costs at scale',
+      'Replace brittle RPA with intelligent, maintainable agents',
+      'Zero-copy integration — no painful ETL migrations',
+    ],
+  },
+  {
+    emoji: '👩‍🏦',
+    title: 'LOB Operations Leader',
+    role: 'Head of HR · Finance · Procurement',
+    bg: 'bg-amber-50',
+    accent: 'text-amber-700',
+    dot: 'bg-amber-500',
+    priorities: [
+      'Business outcomes — not technology features',
+      'Automate complex multi-step back-office workflows',
+      'Reduce manual process overhead and labor costs',
+      'Measurable ROI within 6 months of deployment',
+    ],
+  },
+];
+
 const scrollTo = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
 const tocItems = [
+  { id: 'personas', label: 'Key Buyer Personas', desc: 'The three primary enterprise buyer profiles driving GTM targeting' },
   { id: 'vertical', label: 'Hyper-Verticalized Approach', desc: 'BFSI, Healthcare, Telecom — localized solutions over generic AI' },
   { id: 'land', label: 'Land with Agent Templates and Turnkey Agents', desc: 'Lowest barrier to entry — LOB buyers visualize immediate ROI' },
   { id: 'hero', label: 'Strategic Co-Selling & Hero Assets', desc: 'Tier-1 SIs as vanguard; co-funded Hero Assets per vertical' },
@@ -40,6 +86,30 @@ const GTMView = () => {
                 <span className="text-xs text-muted ml-2">— {item.desc}</span>
               </div>
             </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Key Buyer Personas */}
+      <div id="personas" className="glass-panel p-8">
+        <h3 className="text-xl font-bold text-primary mb-2">Key Buyer Personas</h3>
+        <p className="text-sm text-muted mb-6">The Business AI Cloud shifts the buyer from VP Customer Service to enterprise technology and operations leaders — understanding each persona is critical to GTM targeting.</p>
+        <div className="grid grid-cols-3 gap-6">
+          {personas.map((persona) => (
+            <div key={persona.title} className={`${persona.bg} rounded-xl p-6`}>
+              <div className="text-4xl mb-3">{persona.emoji}</div>
+              <div className={`font-bold text-lg ${persona.accent}`}>{persona.title}</div>
+              <div className="text-xs text-muted mt-1 mb-5 leading-relaxed">{persona.role}</div>
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Core Priorities</div>
+              <ul className="space-y-2">
+                {persona.priorities.map((p, i) => (
+                  <li key={i} className="text-sm text-slate-700 flex gap-2 leading-snug">
+                    <span className={`w-1.5 h-1.5 rounded-full ${persona.dot} shrink-0 mt-1.5`}></span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </div>

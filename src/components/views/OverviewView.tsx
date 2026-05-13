@@ -9,7 +9,6 @@ const tocItems = [
   { id: 'company',   label: 'Company Overview',              desc: 'About Uniphore and the Business AI Cloud' },
   { id: 'platform',  label: 'Platform Architecture',         desc: 'Four composable layers enabling sovereign AI' },
   { id: 'state',     label: 'State of the Platform',         desc: 'Current lifecycle phase and developer reality' },
-  { id: 'personas',  label: 'Key Buyer Personas',            desc: 'The three primary enterprise buyer profiles' },
   { id: 'swot',      label: 'SWOT Analysis',                 desc: 'Competitive position assessment for the BCAI platform' },
 ];
 
@@ -61,50 +60,6 @@ const platformLayers = [
   { name: 'Data Layer', desc: 'Composable data fabric · 200+ connectors · Zero-copy architecture · No data migration', emoji: '🗄️', bg: 'bg-sky-900' },
 ];
 
-const personas = [
-  {
-    emoji: '👩‍💼',
-    title: 'CDAO / CISO',
-    role: 'Chief Data & AI Officer · Chief Information Security Officer',
-    bg: 'bg-indigo-50',
-    accent: 'text-indigo-700',
-    dot: 'bg-indigo-500',
-    priorities: [
-      'Sovereign AI — no cloud lock-in or IP leakage risk',
-      'Zero-copy architecture meets HIPAA, GDPR, FINRA mandates',
-      'SLM guardrails preventing hallucinations at scale',
-      'Enterprise audit trail & governance for compliance',
-    ]
-  },
-  {
-    emoji: '👨‍💻',
-    title: 'VP Enterprise Architecture',
-    role: 'Head of IT Automation · Enterprise Architect',
-    bg: 'bg-emerald-50',
-    accent: 'text-emerald-700',
-    dot: 'bg-emerald-500',
-    priorities: [
-      'Composability — plugs into existing enterprise stack seamlessly',
-      '10x lower TCO vs. hyperscaler LLM API costs at scale',
-      'Replace brittle RPA with intelligent, maintainable agents',
-      'Zero-copy integration — no painful ETL migrations',
-    ]
-  },
-  {
-    emoji: '👩‍🏦',
-    title: 'LOB Operations Leader',
-    role: 'Head of HR · Finance · Procurement',
-    bg: 'bg-amber-50',
-    accent: 'text-amber-700',
-    dot: 'bg-amber-500',
-    priorities: [
-      'Business outcomes — not technology features',
-      'Automate complex multi-step back-office workflows',
-      'Reduce manual process overhead and labor costs',
-      'Measurable ROI within 6 months of deployment',
-    ]
-  },
-];
 
 const OverviewView = () => {
   return (
@@ -189,7 +144,7 @@ const OverviewView = () => {
           </div>
 
           <div className="glass-panel p-6 bg-slate-50">
-            <h4 className="font-bold text-sm text-primary mb-3">The Builder Reality — Three Closed Tiers</h4>
+            <h4 className="font-bold text-sm text-primary mb-3">The Platform Reality — Three Closed Builder Segments</h4>
             {[
               { tier: 'Tier 1', label: 'SI Partners', desc: 'KPMG, Cognizant building vertical agents for enterprise clients.', color: 'bg-blue-500' },
               { tier: 'Tier 2', label: 'Enterprise IT', desc: 'Customer IT teams configuring BPMN workflows via low-code tools.', color: 'bg-indigo-400' },
@@ -207,31 +162,7 @@ const OverviewView = () => {
         </div>
       </div>
 
-      {/* 4. Personas */}
-      <div id="personas" className="glass-panel p-8">
-        <h3 className="text-xl font-bold text-primary mb-2">Key Buyer Personas</h3>
-        <p className="text-sm text-muted mb-6">The Business AI Cloud shifts the buyer from VP Customer Service to enterprise technology and operations leaders.</p>
-        <div className="grid grid-cols-3 gap-6">
-          {personas.map((persona) => (
-            <div key={persona.title} className={`${persona.bg} rounded-xl p-6`}>
-              <div className="text-4xl mb-3">{persona.emoji}</div>
-              <div className={`font-bold text-lg ${persona.accent}`}>{persona.title}</div>
-              <div className="text-xs text-muted mt-1 mb-5 leading-relaxed">{persona.role}</div>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Core Priorities</div>
-              <ul className="space-y-2">
-                {persona.priorities.map((p, i) => (
-                  <li key={i} className="text-sm text-slate-700 flex gap-2 leading-snug">
-                    <span className={`w-1.5 h-1.5 rounded-full ${persona.dot} shrink-0 mt-1.5`}></span>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 5. SWOT */}
+      {/* 4. SWOT */}
       <div id="swot" className="glass-panel p-8">
         <h3 className="text-xl font-bold mb-1 text-primary">SWOT Analysis — Business AI Cloud Platform</h3>
         <p className="text-sm text-muted mb-6">Assessment of Uniphore's competitive position heading into 2026.</p>

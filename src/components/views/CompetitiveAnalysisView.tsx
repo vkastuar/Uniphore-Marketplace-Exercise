@@ -10,7 +10,7 @@ const scrollTo = (id: string) => {
 
 const tocItems = [
   { id: 'differentiator', label: "Uniphore's Winning Intersection", desc: 'The three capabilities that place Uniphore in a unique competitive position' },
-  { id: 'radar', label: 'Capability Radar & Positioning Matrix', desc: '6-dimension comparison and Sovereignty vs. Composability 2×2' },
+  { id: 'radar', label: 'Capability Radar', desc: '6-dimension comparison across Sovereignty, Composability, and SLM Efficiency' },
   { id: 'table', label: 'Detailed Capability Assessment', desc: 'Scoring each competitor archetype across Sovereignty, Composability, SLM Efficiency' },
 ];
 
@@ -30,15 +30,6 @@ const radarColors = [
   { key: 'Salesforce', color: '#10b981', dashed: false },
 ];
 
-// x = Composability (0-100), y = Sovereignty (0-100, high = top)
-const matrixPlayers = [
-  { name: 'Uniphore ⭐', x: 80, y: 88, color: '#0176D3', bold: true },
-  { name: 'Palantir AIP', x: 48, y: 92, color: '#64748b', bold: false },
-  { name: 'AWS / Azure / GCP', x: 90, y: 32, color: '#f59e0b', bold: false },
-  { name: 'Salesforce / ServiceNow', x: 52, y: 15, color: '#10b981', bold: false },
-  { name: 'UiPath / AutomationAnywhere', x: 52, y: 48, color: '#8b5cf6', bold: false },
-  { name: 'Kore.ai / Cognigy', x: 68, y: 52, color: '#ef4444', bold: false },
-];
 
 const competitors = [
   {
@@ -107,7 +98,29 @@ const CompetitiveAnalysisView = () => {
         <p className="view-subtitle">Evaluating the enterprise AI landscape against Uniphore's core tenets: Sovereignty, Composability, Security, and SLM Efficiency.</p>
       </div>
 
-      {/* Winning Intersection — moved to top */}
+      {/* TOC */}
+      <div className="glass-panel p-8">
+        <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
+        <div className="flex flex-col divide-y divide-slate-100">
+          {tocItems.map((item, i) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="flex items-center gap-4 py-3 text-left hover:bg-slate-50 rounded-lg px-2 transition-colors group"
+            >
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 group-hover:bg-accent-primary group-hover:text-white transition-colors">
+                {i + 1}
+              </span>
+              <div>
+                <span className="text-sm font-semibold text-accent-primary group-hover:underline">{item.label}</span>
+                <span className="text-xs text-muted ml-2">— {item.desc}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Winning Intersection */}
       <div id="differentiator" className="glass-panel p-8 border-l-4 border-l-accent-primary bg-white">
         <div className="flex items-center gap-3 mb-4">
           <Target className="text-accent-primary" size={28} />
@@ -131,98 +144,28 @@ const CompetitiveAnalysisView = () => {
         </div>
       </div>
 
-      {/* TOC */}
-      <div className="glass-panel p-8">
-        <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
-        <div className="flex flex-col divide-y divide-slate-100">
-          {tocItems.map((item, i) => (
-            <button
-              key={item.id}
-              onClick={() => scrollTo(item.id)}
-              className="flex items-center gap-4 py-3 text-left hover:bg-slate-50 rounded-lg px-2 transition-colors group"
-            >
-              <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 group-hover:bg-accent-primary group-hover:text-white transition-colors">
-                {i + 1}
-              </span>
-              <div>
-                <span className="text-sm font-semibold text-accent-primary group-hover:underline">{item.label}</span>
-                <span className="text-xs text-muted ml-2">— {item.desc}</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Radar + Positioning Matrix */}
-      <div id="radar" className="grid-2">
-        <div className="glass-panel p-8">
-          <h3 className="text-xl font-bold mb-1 text-primary">Capability Radar</h3>
-          <p className="text-sm text-muted mb-4">Uniphore vs. key archetypes across six capability dimensions</p>
-          <ResponsiveContainer width="100%" height={340}>
-            <RadarChart data={radarData} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
-              <PolarGrid stroke="#e2e8f0" />
-              <PolarAngleAxis dataKey="axis" tick={{ fontSize: 11, fill: '#475569', fontWeight: 600 }} />
-              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
-              {radarColors.map(r => (
-                <Radar key={r.key} name={r.key} dataKey={r.key} stroke={r.color} fill={r.color} fillOpacity={r.key === 'Uniphore' ? 0.15 : 0.05} strokeWidth={r.key === 'Uniphore' ? 2.5 : 1.5} dot={r.key === 'Uniphore'} />
-              ))}
-              <Legend iconType="circle" iconSize={10} formatter={(v) => <span style={{ fontSize: 12, color: '#475569' }}>{v}</span>} />
-            </RadarChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="glass-panel p-8">
-          <h3 className="text-xl font-bold mb-1 text-primary">Strategic Positioning Matrix</h3>
-          <p className="text-sm text-muted mb-4">
-            <span className="font-semibold text-slate-600">Y-axis: Data Sovereignty</span>
-            <span className="mx-2 text-slate-300">·</span>
-            <span className="font-semibold text-slate-600">X-axis: Platform Composability</span>
-          </p>
-          <div className="relative bg-slate-50 rounded-xl border border-slate-200" style={{ height: 340 }}>
-            {/* Y-axis label */}
-            <span
-              className="absolute text-xs font-bold text-slate-500 uppercase tracking-widest"
-              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', top: '50%', left: 4, marginTop: -48, lineHeight: 1 }}
-            >
-              ↑ Sovereignty ↓
-            </span>
-            <span className="absolute text-xs font-semibold text-slate-400" style={{ top: 8, left: '50%', transform: 'translateX(-50%)' }}>High</span>
-            <span className="absolute text-xs font-semibold text-slate-400" style={{ bottom: 28, left: '50%', transform: 'translateX(-50%)' }}>Low</span>
-
-            {/* X-axis label */}
-            <span className="absolute text-xs font-bold text-slate-500 uppercase tracking-widest" style={{ bottom: 6, left: '50%', transform: 'translateX(-50%)' }}>← Composability →</span>
-            <span className="absolute text-xs font-semibold text-slate-400" style={{ top: '50%', left: 20, transform: 'translateY(-50%)' }}>Low</span>
-            <span className="absolute text-xs font-semibold text-slate-400" style={{ top: '50%', right: 8, transform: 'translateY(-50%)' }}>High</span>
-
-            {/* Crosshairs */}
-            <div className="absolute left-1/2 top-6 bottom-6" style={{ width: 1, background: '#cbd5e1' }} />
-            <div className="absolute top-1/2 left-6 right-6" style={{ height: 1, background: '#cbd5e1' }} />
-
-            {/* Quadrant shading */}
-            <div className="absolute top-6 right-1 bottom-1/2 left-1/2 rounded-tr-xl" style={{ background: 'rgba(1,118,211,0.04)' }} />
-
-            {/* Players */}
-            {matrixPlayers.map((p) => {
-              const left = `${8 + p.x * 0.84}%`;
-              const top = `${94 - p.y * 0.84}%`;
-              return (
-                <div key={p.name} className="absolute flex flex-col items-center" style={{ left, top, transform: 'translate(-50%, -50%)' }}>
-                  <div className="w-3 h-3 rounded-full border-2 border-white shadow" style={{ background: p.color }} />
-                  <span className={`text-xs mt-1 whitespace-nowrap px-1.5 py-0.5 rounded ${p.bold ? 'font-bold bg-blue-100 text-blue-700' : 'font-semibold text-slate-600'}`} style={{ fontSize: 10 }}>
-                    {p.name}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      {/* Capability Radar */}
+      <div id="radar" className="glass-panel p-8">
+        <h3 className="text-xl font-bold mb-1 text-primary">Capability Radar</h3>
+        <p className="text-sm text-muted mb-4">Uniphore vs. key archetypes across six capability dimensions</p>
+        <ResponsiveContainer width="100%" height={340}>
+          <RadarChart data={radarData} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
+            <PolarGrid stroke="#e2e8f0" />
+            <PolarAngleAxis dataKey="axis" tick={{ fontSize: 11, fill: '#475569', fontWeight: 600 }} />
+            <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
+            {radarColors.map(r => (
+              <Radar key={r.key} name={r.key} dataKey={r.key} stroke={r.color} fill={r.color} fillOpacity={r.key === 'Uniphore' ? 0.15 : 0.05} strokeWidth={r.key === 'Uniphore' ? 2.5 : 1.5} dot={r.key === 'Uniphore'} />
+            ))}
+            <Legend iconType="circle" iconSize={10} formatter={(v) => <span style={{ fontSize: 12, color: '#475569' }}>{v}</span>} />
+          </RadarChart>
+        </ResponsiveContainer>
       </div>
 
       {/* Detailed table */}
       <div id="table" className="glass-panel overflow-hidden">
         <div className="p-6 border-b border-slate-100">
           <h3 className="text-xl font-bold text-primary">Detailed Capability Assessment</h3>
-          <p className="text-sm text-muted mt-1">Scoring each archetype across Uniphore's four core platform tenets</p>
+          <p className="text-sm text-muted mt-1">Scoring each archetype across Uniphore's platform tenets</p>
         </div>
         <table className="w-full text-left border-collapse">
           <thead>

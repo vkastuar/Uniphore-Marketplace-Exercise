@@ -1,8 +1,18 @@
 import './views.css';
-import { Target } from 'lucide-react';
+import { Target, Shield, Zap, Link } from 'lucide-react';
 import {
   RadarChart, PolarGrid, PolarAngleAxis, Radar, Legend, ResponsiveContainer, Tooltip,
 } from 'recharts';
+
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
+const tocItems = [
+  { id: 'differentiator', label: "Uniphore's Winning Intersection", desc: 'The three capabilities that place Uniphore in a unique competitive position' },
+  { id: 'radar', label: 'Capability Radar & Positioning Matrix', desc: '6-dimension comparison and Sovereignty vs. Composability 2×2' },
+  { id: 'table', label: 'Detailed Capability Assessment', desc: 'Scoring each competitor archetype across Sovereignty, Composability, SLM Efficiency' },
+];
 
 const radarData = [
   { axis: 'Sovereignty', Uniphore: 95, 'AWS/Azure': 35, Palantir: 95, Salesforce: 15 },
@@ -10,17 +20,17 @@ const radarData = [
   { axis: 'Security', Uniphore: 92, 'AWS/Azure': 90, Palantir: 95, Salesforce: 88 },
   { axis: 'SLM Efficiency', Uniphore: 95, 'AWS/Azure': 60, Palantir: 58, Salesforce: 20 },
   { axis: 'Ent. Readiness', Uniphore: 85, 'AWS/Azure': 92, Palantir: 82, Salesforce: 90 },
-  { axis: 'Time to Value', Uniphore: 75, 'AWS/Azure': 50, Palantir: 40, Salesforce: 82 },
+  { axis: 'Time to Value', Uniphore: 52, 'AWS/Azure': 50, Palantir: 40, Salesforce: 82 },
 ];
 
 const radarColors = [
-  { key: 'Uniphore', color: '#2563eb', dashed: false },
+  { key: 'Uniphore', color: '#0176D3', dashed: false },
   { key: 'AWS/Azure', color: '#f59e0b', dashed: false },
   { key: 'Palantir', color: '#64748b', dashed: false },
   { key: 'Salesforce', color: '#10b981', dashed: false },
 ];
 
-// Positioning matrix players: x = Composability (0-100), y = Sovereignty (0-100, high = top)
+// x = Composability (0-100), y = Sovereignty (0-100, high = top)
 const matrixPlayers = [
   { name: 'Uniphore ⭐', x: 80, y: 88, color: '#0176D3', bold: true },
   { name: 'Palantir AIP', x: 48, y: 92, color: '#64748b', bold: false },
@@ -38,7 +48,7 @@ const competitors = [
     composability: 'High', comp: 'high',
     efficiency: 'High Cap / DIY', eff: 'mid',
     uniphoreDiff: false,
-    desc: 'Provide the raw infrastructure and world-class SLM families (Gemma, Phi-4), but the full burden of MLOps pipeline building falls on the customer\'s engineering team. They require expensive internal AI talent to stitch everything together, and ultimate lock-in to a single hyperscaler cloud.',
+    desc: 'Provide the raw infrastructure and world-class SLM families (Gemma, Phi-4), but the full burden of MLOps pipeline building falls on the customer\'s engineering team. They require expensive internal AI talent to stitch everything together, and ultimately lock customers into a single hyperscaler cloud.',
   },
   {
     archetype: 'Enterprise Data Platforms',
@@ -97,8 +107,54 @@ const CompetitiveAnalysisView = () => {
         <p className="view-subtitle">Evaluating the enterprise AI landscape against Uniphore's core tenets: Sovereignty, Composability, Security, and SLM Efficiency.</p>
       </div>
 
+      {/* Winning Intersection — moved to top */}
+      <div id="differentiator" className="glass-panel p-8 border-l-4 border-l-accent-primary bg-white">
+        <div className="flex items-center gap-3 mb-4">
+          <Target className="text-accent-primary" size={28} />
+          <h3 className="text-xl font-bold text-primary">Uniphore's Winning Intersection</h3>
+        </div>
+        <p className="text-md text-muted leading-relaxed mb-6">
+          While CRM platforms act as wrappers routing to expensive 3rd-party LLMs via latency-heavy RAG, and Hyperscalers force customers to build their own MLOps pipelines from scratch, Uniphore occupies a unique position: the <strong>only platform offering true sovereignty + high composability + a native, turnkey SLM Factory</strong>.
+        </p>
+        <div className="grid grid-cols-3 gap-4">
+          {[
+            { icon: Shield, emoji: '🏛️', title: 'Sovereign by Design', desc: 'True on-prem, multi-cloud, or hybrid deployment. Zero cloud lock-in. Enterprises retain 100% data control across any deployment model.', bg: 'bg-blue-50' },
+            { icon: Zap, emoji: '⚡', title: 'Native SLM Factory', desc: 'End-to-end automated fine-tuning — from enterprise data curation to RAFT to deployment — without requiring the customer to staff an MLOps team.', bg: 'bg-indigo-50' },
+            { icon: Link, emoji: '🔗', title: 'Zero-Copy Composability', desc: 'AI computes where the data lives. No data migrations. Integrate any model, any app, any data source without moving sensitive data outside its perimeter.', bg: 'bg-emerald-50' },
+          ].map(d => (
+            <div key={d.title} className={`${d.bg} rounded-xl p-5`}>
+              <div className="text-2xl mb-2">{d.emoji}</div>
+              <div className="font-bold text-sm text-primary mb-2">{d.title}</div>
+              <p className="text-xs text-muted leading-relaxed">{d.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* TOC */}
+      <div className="glass-panel p-8">
+        <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
+        <div className="flex flex-col divide-y divide-slate-100">
+          {tocItems.map((item, i) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="flex items-center gap-4 py-3 text-left hover:bg-slate-50 rounded-lg px-2 transition-colors group"
+            >
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 group-hover:bg-accent-primary group-hover:text-white transition-colors">
+                {i + 1}
+              </span>
+              <div>
+                <span className="text-sm font-semibold text-accent-primary group-hover:underline">{item.label}</span>
+                <span className="text-xs text-muted ml-2">— {item.desc}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Radar + Positioning Matrix */}
-      <div className="grid-2">
+      <div id="radar" className="grid-2">
         <div className="glass-panel p-8">
           <h3 className="text-xl font-bold mb-1 text-primary">Capability Radar</h3>
           <p className="text-sm text-muted mb-4">Uniphore vs. key archetypes across six capability dimensions</p>
@@ -123,22 +179,18 @@ const CompetitiveAnalysisView = () => {
             <span className="font-semibold text-slate-600">X-axis: Platform Composability</span>
           </p>
           <div className="relative bg-slate-50 rounded-xl border border-slate-200" style={{ height: 340 }}>
-            {/* Y-axis label (Sovereignty) — vertical, on the left */}
+            {/* Y-axis label */}
             <span
               className="absolute text-xs font-bold text-slate-500 uppercase tracking-widest"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', top: '50%', left: 4, marginTop: -48, lineHeight: 1 }}
             >
               ↑ Sovereignty ↓
             </span>
-
-            {/* Y-axis endpoints */}
             <span className="absolute text-xs font-semibold text-slate-400" style={{ top: 8, left: '50%', transform: 'translateX(-50%)' }}>High</span>
             <span className="absolute text-xs font-semibold text-slate-400" style={{ bottom: 28, left: '50%', transform: 'translateX(-50%)' }}>Low</span>
 
-            {/* X-axis label (Composability) — horizontal, at the bottom */}
+            {/* X-axis label */}
             <span className="absolute text-xs font-bold text-slate-500 uppercase tracking-widest" style={{ bottom: 6, left: '50%', transform: 'translateX(-50%)' }}>← Composability →</span>
-
-            {/* X-axis endpoints */}
             <span className="absolute text-xs font-semibold text-slate-400" style={{ top: '50%', left: 20, transform: 'translateY(-50%)' }}>Low</span>
             <span className="absolute text-xs font-semibold text-slate-400" style={{ top: '50%', right: 8, transform: 'translateY(-50%)' }}>High</span>
 
@@ -147,11 +199,10 @@ const CompetitiveAnalysisView = () => {
             <div className="absolute top-1/2 left-6 right-6" style={{ height: 1, background: '#cbd5e1' }} />
 
             {/* Quadrant shading */}
-            <div className="absolute top-6 right-1 bottom-1/2 left-1/2 rounded-tr-xl" style={{ background: 'rgba(37,99,235,0.04)' }} />
+            <div className="absolute top-6 right-1 bottom-1/2 left-1/2 rounded-tr-xl" style={{ background: 'rgba(1,118,211,0.04)' }} />
 
             {/* Players */}
             {matrixPlayers.map((p) => {
-              // x: composability → left offset; y: sovereignty → top offset (inverted)
               const left = `${8 + p.x * 0.84}%`;
               const top = `${94 - p.y * 0.84}%`;
               return (
@@ -168,7 +219,7 @@ const CompetitiveAnalysisView = () => {
       </div>
 
       {/* Detailed table */}
-      <div className="glass-panel overflow-hidden">
+      <div id="table" className="glass-panel overflow-hidden">
         <div className="p-6 border-b border-slate-100">
           <h3 className="text-xl font-bold text-primary">Detailed Capability Assessment</h3>
           <p className="text-sm text-muted mt-1">Scoring each archetype across Uniphore's four core platform tenets</p>
@@ -197,30 +248,6 @@ const CompetitiveAnalysisView = () => {
             ))}
           </tbody>
         </table>
-      </div>
-
-      {/* Differentiator callout */}
-      <div className="glass-panel p-8 border-l-4 border-l-accent-primary bg-white">
-        <div className="flex items-center gap-3 mb-4">
-          <Target className="text-accent-primary" size={28} />
-          <h3 className="text-xl font-bold text-primary">Uniphore's Winning Intersection</h3>
-        </div>
-        <p className="text-md text-muted leading-relaxed mb-6">
-          While CRM platforms act as wrappers routing to expensive 3rd-party LLMs via latency-heavy RAG, and Hyperscalers force customers to build their own MLOps pipelines from scratch, Uniphore occupies a unique position: the <strong>only platform offering true sovereignty + high composability + a native, turnkey SLM Factory</strong>.
-        </p>
-        <div className="grid grid-cols-3 gap-4">
-          {[
-            { emoji: '🏛️', title: 'Sovereign by Design', desc: 'True on-prem, multi-cloud, or hybrid deployment. Zero cloud lock-in. Enterprises retain 100% data control across any deployment model.', bg: 'bg-blue-50' },
-            { emoji: '⚡', title: 'Native SLM Factory', desc: 'End-to-end automated fine-tuning — from enterprise data curation to RAFT to deployment — without requiring the customer to staff an MLOps team.', bg: 'bg-indigo-50' },
-            { emoji: '🔗', title: 'Zero-Copy Composability', desc: 'AI computes where the data lives. No data migrations. Integrate any model, any app, any data source without moving sensitive data outside its perimeter.', bg: 'bg-emerald-50' },
-          ].map(d => (
-            <div key={d.title} className={`${d.bg} rounded-xl p-5`}>
-              <div className="text-2xl mb-2">{d.emoji}</div>
-              <div className="font-bold text-sm text-primary mb-2">{d.title}</div>
-              <p className="text-xs text-muted leading-relaxed">{d.desc}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

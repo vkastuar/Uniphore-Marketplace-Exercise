@@ -1,5 +1,17 @@
-import { Database, GitBranch, Cpu, ShieldCheck, Users, Search, LayoutDashboard, Store, CheckCircle2, Circle, Network } from 'lucide-react';
+import { Database, GitBranch, Cpu, ShieldCheck, Users, Search, LayoutDashboard, Store, CheckCircle2, Circle, Network, CreditCard, BarChart2, Receipt } from 'lucide-react';
 import './views.css';
+
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
+const tocItems = [
+  { id: 'exchange', label: 'The Exchange: What is Traded?', desc: 'Five deep enterprise asset classes — SLMs, agents, ontologies, connectors, governance' },
+  { id: 'priority', label: 'Feature Priority Matrix', desc: 'Build Now vs. Strategic Bets vs. Defer — Horizon 1 scoping decisions' },
+  { id: 'scope', label: 'MVP Feature Scope', desc: 'Demand side, supply side, and host features for Horizon 1' },
+  { id: 'billing', label: 'Platform Billing Capabilities', desc: 'Platform Credit API, asset pricing logic engine, and partner rev-share ledger' },
+  { id: 'roadmap', label: 'Execution Roadmap', desc: 'Phased milestones from API stabilization through Horizon 2 expansion' },
+];
 
 const mvpStats = [
   { value: '12–18mo', label: 'Recommended Launch', sub: 'After integration debt is cleared' },
@@ -143,8 +155,30 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
         ))}
       </div>
 
+      {/* TOC */}
+      <div className="glass-panel p-8">
+        <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
+        <div className="flex flex-col divide-y divide-slate-100">
+          {tocItems.map((item, i) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="flex items-center gap-4 py-3 text-left hover:bg-slate-50 rounded-lg px-2 transition-colors group"
+            >
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 group-hover:bg-accent-primary group-hover:text-white transition-colors">
+                {i + 1}
+              </span>
+              <div>
+                <span className="text-sm font-semibold text-accent-primary group-hover:underline">{item.label}</span>
+                <span className="text-xs text-muted ml-2">— {item.desc}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* What the Exchange Hosts */}
-      <div>
+      <div id="exchange">
         <div className="flex items-center gap-3 mb-2">
           <Store className="text-primary" size={26} />
           <h3 className="text-2xl font-bold text-primary">The Exchange: What is Traded?</h3>
@@ -174,7 +208,7 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
       </div>
 
       {/* Feature Priority Matrix */}
-      <div>
+      <div id="priority">
         <h3 className="text-2xl font-bold text-primary mb-2">Feature Priority Matrix</h3>
         <p className="text-sm text-muted mb-6">Plotting MVP features by strategic value vs. development effort — what to build first for Horizon 1.</p>
         <div className="grid grid-cols-2 gap-1 rounded-xl overflow-hidden border border-slate-200">
@@ -196,7 +230,7 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
       </div>
 
       {/* MVP Feature Scope - 3 sides */}
-      <div>
+      <div id="scope">
         <h3 className="text-2xl font-bold text-primary mb-6">MVP Feature Scope (Horizon 1)</h3>
         <div className="grid-2">
           {/* Demand Side */}
@@ -281,8 +315,60 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
         </div>
       </div>
 
+      {/* Platform Billing Capabilities */}
+      <div id="billing">
+        <h3 className="text-2xl font-bold text-primary mb-2">Platform Billing Capabilities</h3>
+        <p className="text-sm text-muted mb-6">The Horizon 1 MVP must include a billing engine anchored to Uniphore's unified Platform Credit model. Three core capabilities are required before any marketplace transaction can process.</p>
+
+        <div className="grid grid-cols-3 gap-5 mb-5">
+          <div className="glass-panel p-6 border-t-4 border-t-accent-primary">
+            <div className="flex items-center gap-2 mb-3">
+              <CreditCard className="text-accent-primary" size={20} />
+              <h4 className="font-bold text-primary">Platform Credit API Integration</h4>
+            </div>
+            <p className="text-sm text-muted leading-relaxed">While the Credit Wallet lives in the core Uniphore Admin Dashboard, the Marketplace MVP requires an API integration to <strong>read a customer's credit balance</strong> and <strong>authorize transactions</strong> — e.g., verifying a customer has 50,000 credits before unlocking a domain ontology.</p>
+          </div>
+          <div className="glass-panel p-6 border-t-4 border-t-indigo-500">
+            <div className="flex items-center gap-2 mb-3">
+              <BarChart2 className="text-indigo-600" size={20} />
+              <h4 className="font-bold text-primary">Asset Pricing Logic Engine</h4>
+            </div>
+            <p className="text-sm text-muted leading-relaxed mb-3">Backend capability to support the four core monetization tiers:</p>
+            <ul className="space-y-2">
+              {[
+                { tier: 'Transaction-Based Drawdown', desc: 'Credits per resolved outcome (e.g., 50 credits/ticket) for fully packaged agents. 15–20% Uniphore fee, 80–85% partner.' },
+                { tier: 'One-Time Activation Burn', desc: 'Single large credit deduction to unlock full domain knowledge templates (ontologies). Freemium preview available at $0.' },
+                { tier: '$0 / Consumption Only', desc: 'Agent templates are free to adopt — monetization comes from underlying BPMN compute and SLM token inference.' },
+                { tier: 'Pay-Per-Token (SLMs)', desc: 'Base SLMs billed per 1M tokens. Premium partner SLMs use a rev-share markup model.' },
+              ].map(t => (
+                <li key={t.tier} className="text-xs text-slate-700 leading-snug">
+                  <span className="font-bold text-indigo-700">{t.tier}:</span> {t.desc}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="glass-panel p-6 border-t-4 border-t-emerald-500">
+            <div className="flex items-center gap-2 mb-3">
+              <Receipt className="text-emerald-600" size={20} />
+              <h4 className="font-bold text-primary">Partner Rev-Share Ledger</h4>
+            </div>
+            <p className="text-sm text-muted leading-relaxed mb-4">An internal reporting engine for Uniphore Finance that automatically calculates the platform fee and tracks the revenue share owed to 3rd-party partners based on utilized credits.</p>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-emerald-50 rounded-lg p-3 text-center border border-emerald-100">
+                <div className="text-xl font-black text-emerald-700">80–85%</div>
+                <div className="text-xs text-emerald-600 font-semibold mt-0.5">Partner Revenue Share</div>
+              </div>
+              <div className="bg-slate-50 rounded-lg p-3 text-center border border-slate-200">
+                <div className="text-xl font-black text-slate-600">15–20%</div>
+                <div className="text-xs text-slate-500 font-semibold mt-0.5">Uniphore Platform Fee</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Roadmap */}
-      <div>
+      <div id="roadmap">
         <h3 className="text-2xl font-bold text-primary mb-2">Execution Roadmap</h3>
         <p className="text-sm text-muted mb-6">Phased milestones from platform stabilization through Horizon 2 marketplace expansion.</p>
         <div className="relative">

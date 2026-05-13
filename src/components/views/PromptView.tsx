@@ -1,5 +1,14 @@
 import './views.css';
 
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
+const tocItems = [
+  { id: 'deliverables', label: 'Exercise Deliverables', desc: 'Four required sections plus extra credit vibe-code prototype' },
+  { id: 'context', label: 'Context & Navigation', desc: 'The core question, the answer, and how to navigate this deck' },
+];
+
 const PromptView = () => {
   return (
     <div className="view-container animate-fade-in">
@@ -8,7 +17,29 @@ const PromptView = () => {
         <p className="view-subtitle">Uniphore Business AI Cloud Platform — Product Manager Exercise</p>
       </div>
 
-      <div className="glass-panel overflow-hidden">
+      {/* TOC */}
+      <div className="glass-panel p-8">
+        <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
+        <div className="flex flex-col divide-y divide-slate-100">
+          {tocItems.map((item, i) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="flex items-center gap-4 py-3 text-left hover:bg-slate-50 rounded-lg px-2 transition-colors group"
+            >
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 group-hover:bg-accent-primary group-hover:text-white transition-colors">
+                {i + 1}
+              </span>
+              <div>
+                <span className="text-sm font-semibold text-accent-primary group-hover:underline">{item.label}</span>
+                <span className="text-xs text-muted ml-2">— {item.desc}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div id="deliverables" className="glass-panel overflow-hidden">
         <div className="p-8">
           <p className="text-lg mb-8 leading-relaxed text-primary max-w-4xl">
             As a B2B AI platform product manager for Uniphore's Business AI Cloud Platform, you need to determine <strong>whether or when you should introduce a marketplace</strong> as you expand the developer community adoption of the platform.
@@ -41,7 +72,7 @@ const PromptView = () => {
       </div>
 
       {/* Context callout boxes */}
-      <div className="grid grid-cols-3 gap-5">
+      <div id="context" className="grid grid-cols-3 gap-5">
         <div className="glass-panel p-6 border-t-4 border-t-accent-primary">
           <div className="text-2xl mb-3">🎯</div>
           <h4 className="font-bold text-primary mb-2">The Core Question</h4>

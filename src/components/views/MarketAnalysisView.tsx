@@ -5,6 +5,17 @@ import {
 import { TrendingUp, ServerCrash, Lock, Workflow, ExternalLink } from 'lucide-react';
 import './views.css';
 
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
+const tocItems = [
+  { id: 'stats', label: 'Key Market Statistics', desc: '$11–12B market size, 11% production adoption, 40% embed forecast' },
+  { id: 'growth', label: 'Market Growth & Adoption', desc: 'Enterprise AI agent growth curve and adoption reality check' },
+  { id: 'market-sizing', label: 'TAM / SAM / SOM', desc: "Uniphore's layered addressable market breakdown and estimates" },
+  { id: 'trends', label: 'Four Defining Trends', desc: 'Macro forces shaping enterprise AI adoption and Uniphore\'s positioning' },
+];
+
 const marketData = [
   { year: '2025', size: 8 },
   { year: '2026', size: 12 },
@@ -99,8 +110,30 @@ const MarketAnalysisView = () => {
         <p className="view-subtitle">The $50B Enterprise AI Agent Opportunity — sizing the market and the four trends defining the next wave of adoption.</p>
       </div>
 
+      {/* TOC */}
+      <div className="glass-panel p-8">
+        <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
+        <div className="flex flex-col divide-y divide-slate-100">
+          {tocItems.map((item, i) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="flex items-center gap-4 py-3 text-left hover:bg-slate-50 rounded-lg px-2 transition-colors group"
+            >
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 text-xs font-bold flex items-center justify-center shrink-0 group-hover:bg-accent-primary group-hover:text-white transition-colors">
+                {i + 1}
+              </span>
+              <div>
+                <span className="text-sm font-semibold text-accent-primary group-hover:underline">{item.label}</span>
+                <span className="text-xs text-muted ml-2">— {item.desc}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Key stats */}
-      <div className="grid grid-cols-4 gap-5">
+      <div id="stats" className="grid grid-cols-4 gap-5">
         {[
           {
             value: '$11–12B', label: 'Market Size (2026E)', sub: 'Enterprise AI Agent market',
@@ -135,7 +168,7 @@ const MarketAnalysisView = () => {
       </div>
 
       {/* Market Growth + Adoption */}
-      <div className="grid-2">
+      <div id="growth" className="grid-2">
         <div className="glass-panel p-8">
           <h3 className="text-xl font-bold mb-1 text-primary">Enterprise AI Agent Market Growth</h3>
           <p className="text-sm text-muted mb-6">Projected market size 2025–2030 ($B), 43–50% CAGR</p>
@@ -186,7 +219,7 @@ const MarketAnalysisView = () => {
       </div>
 
       {/* TAM/SAM/SOM + Vertical Growth */}
-      <div className="grid-2">
+      <div id="market-sizing" className="grid-2">
         <div className="glass-panel p-8">
           <h3 className="text-xl font-bold mb-1 text-primary">Addressable Market — TAM / SAM / SOM</h3>
           <p className="text-sm text-muted mb-6">Uniphore's layered market opportunity (2026 estimates)</p>
@@ -278,7 +311,7 @@ const MarketAnalysisView = () => {
       </div>
 
       {/* Top Trends */}
-      <div>
+      <div id="trends">
         <h3 className="text-2xl font-bold mb-2 text-primary">Four Defining Market Trends</h3>
         <p className="text-sm text-muted mb-6">Macro forces shaping enterprise AI adoption — and their implications for Uniphore's strategy.</p>
         <div className="grid grid-cols-2 gap-5">

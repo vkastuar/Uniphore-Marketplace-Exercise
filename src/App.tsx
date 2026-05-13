@@ -16,10 +16,13 @@ import MarketAnalysisView from './components/views/MarketAnalysisView';
 import CompetitiveAnalysisView from './components/views/CompetitiveAnalysisView';
 import StrategyView from './components/views/StrategyView';
 import MVPView from './components/views/MVPView';
+import MarketplaceApp from './components/marketplace/MarketplaceApp';
 
 type ViewType = 'prompt' | 'overview' | 'market' | 'competitive' | 'strategy' | 'mvp';
+type AppMode = 'presentation' | 'marketplace';
 
 function App() {
+  const [appMode, setAppMode] = useState<AppMode>('presentation');
   const [activeView, setActiveView] = useState<ViewType>('prompt');
 
   const navItems = [
@@ -38,10 +41,14 @@ function App() {
       case 'market': return <MarketAnalysisView />;
       case 'competitive': return <CompetitiveAnalysisView />;
       case 'strategy': return <StrategyView />;
-      case 'mvp': return <MVPView />;
+      case 'mvp': return <MVPView onLaunchPrototype={() => setAppMode('marketplace')} />;
       default: return <PromptView />;
     }
   };
+
+  if (appMode === 'marketplace') {
+    return <MarketplaceApp onExit={() => setAppMode('presentation')} />;
+  }
 
   return (
     <div className="app-container">
@@ -65,6 +72,17 @@ function App() {
             );
           })}
         </nav>
+        
+        <div style={{ marginTop: 'auto', padding: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+           <button 
+             className="primary-button" 
+             style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+             onClick={() => setAppMode('marketplace')}
+           >
+             <Rocket size={18} />
+             Launch Prototype
+           </button>
+        </div>
       </aside>
       
       <main className="main-content">

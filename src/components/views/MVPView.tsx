@@ -1,9 +1,9 @@
-import { Database, GitBranch, Cpu, ShieldCheck, Users, Search, LayoutDashboard, Store, CheckCircle2, Circle } from 'lucide-react';
+import { Database, GitBranch, Cpu, ShieldCheck, Users, Search, LayoutDashboard, Store, CheckCircle2, Circle, Network } from 'lucide-react';
 import './views.css';
 
 const mvpStats = [
   { value: '12–18mo', label: 'Recommended Launch', sub: 'After integration debt is cleared' },
-  { value: 'H1 Only', label: 'MVP Scope', sub: 'SI-led Partner Exchange' },
+  { value: 'MVP Scope', label: 'Horizon 1', sub: 'SI-led Partner Exchange' },
   { value: '3', label: 'Target Verticals', sub: 'BFSI, Telecom, Healthcare' },
   { value: '70/30', label: 'Revenue Share (H3)', sub: 'Partner / Uniphore split' },
 ];
@@ -57,10 +57,17 @@ const assetTypes = [
   },
   {
     icon: GitBranch, bg: 'bg-indigo-50', border: 'border-indigo-100', iconColor: 'text-accent-secondary',
-    title: 'Agent Templates & BPMN Workflows',
+    title: 'Agents & Agent Templates',
     tag: 'High Value',
     tagBg: 'bg-indigo-100 text-indigo-700',
-    desc: 'Pre-configured BPMN workflow orchestrations for specific LOB processes (e.g., "Automated Employee Onboarding Agent" or "Contract Risk Review Workflow").',
+    desc: 'Fully packaged autonomous agents for standardized use cases, alongside pre-configured BPMN workflow templates that require "last mile" SI integration (e.g., "Automated Employee Onboarding").',
+  },
+  {
+    icon: Network, bg: 'bg-fuchsia-50', border: 'border-fuchsia-100', iconColor: 'text-fuchsia-600',
+    title: 'Domain-specific knowledge templates',
+    tag: 'Time-to-Value',
+    tagBg: 'bg-fuchsia-100 text-fuchsia-700',
+    desc: 'A curated layer of anonymized, pre-built domain ontologies, entity taxonomies, and knowledge graph templates that accelerate time-to-value. A healthcare customer wouldn\'t have to build their clinical entity graph from zero — they\'d start from the knowledge scaffold and customize it with their proprietary data.',
   },
   {
     icon: Database, bg: 'bg-emerald-50', border: 'border-emerald-100', iconColor: 'text-emerald-600',
@@ -113,7 +120,11 @@ const roadmap = [
   },
 ];
 
-const MVPView = () => {
+interface MVPViewProps {
+  onLaunchPrototype?: () => void;
+}
+
+const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
   return (
     <div className="view-container animate-fade-in">
       <div className="view-header">
@@ -139,7 +150,7 @@ const MVPView = () => {
           <h3 className="text-2xl font-bold text-primary">The Exchange: What is Traded?</h3>
         </div>
         <p className="text-md text-muted mb-6 leading-relaxed max-w-4xl">
-          Drawing inspiration from mature B2B marketplaces like Salesforce AppExchange and Snowflake Data Cloud, the Uniphore BCAI Marketplace will not host generic "prompt wrappers." It will be an exchange for deep, secure enterprise assets that require professional deployment.
+          Drawing inspiration from mature enterprise marketplaces like Salesforce AppExchange <span className="text-slate-500">(components, industry templates)</span> and Snowflake Data Cloud <span className="text-slate-500">(data apps, models)</span>, the Uniphore BCAI Marketplace will not host generic "prompt wrappers." It will be an exchange for deep, secure enterprise assets that require professional deployment.
         </p>
         <div className="grid grid-cols-2 gap-5">
           {assetTypes.map((a) => {
@@ -296,6 +307,21 @@ const MVPView = () => {
           </div>
         </div>
       </div>
+
+      {/* Prototype Launch */}
+      {onLaunchPrototype && (
+        <div className="mt-12 glass-panel p-8 text-center border-accent-primary border-2 bg-slate-50/50">
+          <h3 className="text-2xl font-bold text-primary mb-3">View the Acme Insurance Journey</h3>
+          <p className="text-muted mb-6 max-w-2xl mx-auto">Launch the interactive UI prototype to see how the marketplace implements frictionless discovery, transparent pricing, and the SI lead generation hook.</p>
+          <button 
+            className="primary-button" 
+            style={{ padding: '0.75rem 2rem', fontSize: '1.1rem' }}
+            onClick={onLaunchPrototype}
+          >
+            Launch MVP Prototype
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,16 +1,5 @@
 import { Building2, AppWindow, Code2, Users, Briefcase, Server, DollarSign, TrendingUp } from 'lucide-react';
 import './views.css';
-import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
-} from 'recharts';
-
-const revenueData = [
-  { segment: 'CCaaS Heritage', y2026: 180, y2028: 220 },
-  { segment: 'Back-Office Expansion', y2026: 45, y2028: 180 },
-  { segment: 'SLM Licensing', y2026: 30, y2028: 120 },
-  { segment: 'Marketplace', y2026: 5, y2028: 80 },
-  { segment: 'New Verticals', y2026: 15, y2028: 80 },
-];
 
 const pillars = [
   {
@@ -69,26 +58,10 @@ const StrategyView = () => {
         </div>
       </div>
 
-      {/* Revenue Opportunity + Key Answer */}
-      <div className="grid-2">
-        <div className="glass-panel p-8">
-          <h3 className="text-xl font-bold mb-1 text-primary">Revenue Expansion Opportunity</h3>
-          <p className="text-sm text-muted mb-5">Projected ARR by segment — the marketplace opens entirely new revenue pools</p>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={revenueData} margin={{ bottom: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-              <XAxis dataKey="segment" stroke="#94a3b8" tick={{ fontSize: 10 }} angle={-20} textAnchor="end" interval={0} />
-              <YAxis stroke="#94a3b8" tickFormatter={v => `$${v}M`} tick={{ fontSize: 11 }} />
-              <Tooltip formatter={(v) => [`$${Number(v ?? 0)}M ARR`]} contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }} />
-              <Legend iconSize={10} formatter={(v) => <span style={{ fontSize: 11 }}>{v === 'y2026' ? '2026E' : '2028E'}</span>} />
-              <Bar dataKey="y2026" name="y2026" fill="#93c5fd" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="y2028" name="y2028" fill="#2563eb" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="glass-panel p-8 flex flex-col gap-4">
-          <h3 className="text-xl font-bold text-primary">The Strategic Answer</h3>
+      {/* Key Answer */}
+      <div className="glass-panel p-8">
+        <h3 className="text-xl font-bold text-primary mb-4">The Strategic Answer</h3>
+        <div className="grid grid-cols-3 gap-4">
           <div className="p-5 bg-blue-50 rounded-xl border border-blue-200">
             <div className="flex items-center gap-2 mb-2">
               <DollarSign className="text-blue-600" size={20} />

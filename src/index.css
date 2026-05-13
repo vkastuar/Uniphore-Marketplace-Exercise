@@ -16,20 +16,20 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Theme variables - Light Mode Enterprise */
-  --bg-main: #f8fafc;
-  --bg-sidebar: #ffffff;
+  /* Theme variables — Salesforce-inspired */
+  --bg-main: #f4f6f8;
+  --bg-sidebar: #032D60;
   --bg-card: #ffffff;
-  --border-color: #e2e8f0;
-  --accent-primary: #2563eb; /* Strong corporate blue */
-  --accent-secondary: #4f46e5; /* Indigo */
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --border-color: #e5e7eb;
+  --accent-primary: #0176D3;   /* Salesforce blue */
+  --accent-secondary: #1B4F9D; /* Salesforce dark blue */
+  --text-primary: #0a1628;
+  --text-secondary: #444f60;
+  --text-muted: #6b7280;
+
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 10px 24px -4px rgb(0 0 0 / 0.1), 0 4px 8px -4px rgb(0 0 0 / 0.06);
 }
 
 body {

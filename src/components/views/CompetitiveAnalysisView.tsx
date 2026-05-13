@@ -5,11 +5,11 @@ import {
 } from 'recharts';
 
 const radarData = [
-  { axis: 'Sovereignty', Uniphore: 95, 'AWS/Azure': 35, Palantir: 80, Salesforce: 15 },
+  { axis: 'Sovereignty', Uniphore: 95, 'AWS/Azure': 35, Palantir: 95, Salesforce: 15 },
   { axis: 'Composability', Uniphore: 88, 'AWS/Azure': 92, Palantir: 55, Salesforce: 55 },
-  { axis: 'Security', Uniphore: 92, 'AWS/Azure': 90, Palantir: 92, Salesforce: 88 },
+  { axis: 'Security', Uniphore: 92, 'AWS/Azure': 90, Palantir: 95, Salesforce: 88 },
   { axis: 'SLM Efficiency', Uniphore: 95, 'AWS/Azure': 60, Palantir: 58, Salesforce: 20 },
-  { axis: 'Ent. Readiness', Uniphore: 85, 'AWS/Azure': 92, Palantir: 78, Salesforce: 90 },
+  { axis: 'Ent. Readiness', Uniphore: 85, 'AWS/Azure': 92, Palantir: 82, Salesforce: 90 },
   { axis: 'Time to Value', Uniphore: 75, 'AWS/Azure': 50, Palantir: 40, Salesforce: 82 },
 ];
 
@@ -20,10 +20,10 @@ const radarColors = [
   { key: 'Salesforce', color: '#10b981', dashed: false },
 ];
 
-// Positioning matrix players: [composability 0-100, sovereignty 0-100]
+// Positioning matrix players: x = Composability (0-100), y = Sovereignty (0-100, high = top)
 const matrixPlayers = [
-  { name: 'Uniphore ⭐', x: 80, y: 88, color: '#2563eb', bold: true },
-  { name: 'Palantir AIP', x: 48, y: 82, color: '#64748b', bold: false },
+  { name: 'Uniphore ⭐', x: 80, y: 88, color: '#0176D3', bold: true },
+  { name: 'Palantir AIP', x: 48, y: 92, color: '#64748b', bold: false },
   { name: 'AWS / Azure / GCP', x: 90, y: 32, color: '#f59e0b', bold: false },
   { name: 'Salesforce / ServiceNow', x: 52, y: 15, color: '#10b981', bold: false },
   { name: 'UiPath / AutomationAnywhere', x: 52, y: 48, color: '#8b5cf6', bold: false },
@@ -117,13 +117,30 @@ const CompetitiveAnalysisView = () => {
 
         <div className="glass-panel p-8">
           <h3 className="text-xl font-bold mb-1 text-primary">Strategic Positioning Matrix</h3>
-          <p className="text-sm text-muted mb-4">Sovereignty vs. Composability — Uniphore is the only player in the top-right quadrant</p>
+          <p className="text-sm text-muted mb-4">
+            <span className="font-semibold text-slate-600">Y-axis: Data Sovereignty</span>
+            <span className="mx-2 text-slate-300">·</span>
+            <span className="font-semibold text-slate-600">X-axis: Platform Composability</span>
+          </p>
           <div className="relative bg-slate-50 rounded-xl border border-slate-200" style={{ height: 340 }}>
-            {/* Quadrant labels */}
-            <span className="absolute top-3 left-4 text-xs font-bold text-slate-400 uppercase tracking-wider">← Low Composability</span>
-            <span className="absolute top-3 right-4 text-xs font-bold text-slate-400 uppercase tracking-wider">High Composability →</span>
-            <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-400 uppercase tracking-wider">Low Sovereignty</span>
-            <span className="absolute top-1/2 -translate-y-1/2 left-1 text-xs font-bold text-slate-400 uppercase tracking-wider" style={{ writingMode: 'vertical-rl', transform: 'translateY(-50%) rotate(180deg)' }}>High Sovereignty</span>
+            {/* Y-axis label (Sovereignty) — vertical, on the left */}
+            <span
+              className="absolute text-xs font-bold text-slate-500 uppercase tracking-widest"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', top: '50%', left: 4, marginTop: -48, lineHeight: 1 }}
+            >
+              ↑ Sovereignty ↓
+            </span>
+
+            {/* Y-axis endpoints */}
+            <span className="absolute text-xs font-semibold text-slate-400" style={{ top: 8, left: '50%', transform: 'translateX(-50%)' }}>High</span>
+            <span className="absolute text-xs font-semibold text-slate-400" style={{ bottom: 28, left: '50%', transform: 'translateX(-50%)' }}>Low</span>
+
+            {/* X-axis label (Composability) — horizontal, at the bottom */}
+            <span className="absolute text-xs font-bold text-slate-500 uppercase tracking-widest" style={{ bottom: 6, left: '50%', transform: 'translateX(-50%)' }}>← Composability →</span>
+
+            {/* X-axis endpoints */}
+            <span className="absolute text-xs font-semibold text-slate-400" style={{ top: '50%', left: 20, transform: 'translateY(-50%)' }}>Low</span>
+            <span className="absolute text-xs font-semibold text-slate-400" style={{ top: '50%', right: 8, transform: 'translateY(-50%)' }}>High</span>
 
             {/* Crosshairs */}
             <div className="absolute left-1/2 top-6 bottom-6" style={{ width: 1, background: '#cbd5e1' }} />

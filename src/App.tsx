@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { 
-  FileText, 
-  Globe, 
-  BarChart3, 
-  Swords, 
-  Lightbulb, 
-  Rocket 
+import {
+  FileText,
+  Globe,
+  BarChart3,
+  Swords,
+  Lightbulb,
+  Rocket,
+  TrendingUp,
+  DollarSign,
 } from 'lucide-react';
 import './App.css';
 
@@ -16,9 +18,11 @@ import MarketAnalysisView from './components/views/MarketAnalysisView';
 import CompetitiveAnalysisView from './components/views/CompetitiveAnalysisView';
 import StrategyView from './components/views/StrategyView';
 import MVPView from './components/views/MVPView';
+import GTMView from './components/views/GTMView';
+import PricingView from './components/views/PricingView';
 import MarketplaceApp from './components/marketplace/MarketplaceApp';
 
-type ViewType = 'prompt' | 'overview' | 'market' | 'competitive' | 'strategy' | 'mvp';
+type ViewType = 'prompt' | 'overview' | 'market' | 'competitive' | 'strategy' | 'mvp' | 'gtm' | 'pricing';
 type AppMode = 'presentation' | 'marketplace';
 
 function App() {
@@ -30,8 +34,10 @@ function App() {
     { id: 'overview', label: 'Uniphore Overview', icon: Globe },
     { id: 'market', label: 'Market Analysis', icon: BarChart3 },
     { id: 'competitive', label: 'Competitive Analysis', icon: Swords },
-    { id: 'strategy', label: 'Business AI Strategy', icon: Lightbulb },
+    { id: 'strategy', label: 'Marketplace Strategy', icon: Lightbulb },
     { id: 'mvp', label: 'MVP Definition', icon: Rocket },
+    { id: 'gtm', label: 'Marketplace GTM', icon: TrendingUp },
+    { id: 'pricing', label: 'Pricing Strategy', icon: DollarSign },
   ] as const;
 
   const renderView = () => {
@@ -42,6 +48,8 @@ function App() {
       case 'competitive': return <CompetitiveAnalysisView />;
       case 'strategy': return <StrategyView />;
       case 'mvp': return <MVPView onLaunchPrototype={() => setAppMode('marketplace')} />;
+      case 'gtm': return <GTMView />;
+      case 'pricing': return <PricingView />;
       default: return <PromptView />;
     }
   };

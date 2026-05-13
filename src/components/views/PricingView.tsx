@@ -73,11 +73,6 @@ const assetTiers = [
   },
 ];
 
-const creditTiers = [
-  { tier: 'Starter', commit: '$250K', tag: 'bg-slate-100 text-slate-700', desc: 'Mid-market entry — first-time Platform Credit commitments' },
-  { tier: 'Growth', commit: '$500K', tag: 'bg-blue-100 text-blue-700', desc: 'Scaling enterprises with multi-agent deployments underway' },
-  { tier: 'Enterprise', commit: '$1M+', tag: 'bg-indigo-100 text-indigo-700', desc: 'Large-scale agentic transformation with SLM Factory usage' },
-];
 
 const creditUses = [
   { label: 'Human Agent Seat Licenses', desc: 'Maintain seat licenses for remaining human agents during the AI transition period.' },
@@ -160,16 +155,10 @@ const PricingView = () => {
         {/* Credit Tiers */}
         <div className="mb-6">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Annual Commit Tiers</span>
-          <div className="grid grid-cols-3 gap-4 mt-3">
-            {creditTiers.map(t => (
-              <div key={t.tier} className="bg-white rounded-xl p-5 border border-slate-200 text-center shadow-sm">
-                <div className={`inline-block text-xs font-bold px-2 py-0.5 rounded-full mb-2 ${t.tag}`}>{t.tier}</div>
-                <div className="text-2xl font-black text-primary mb-1">{t.commit}</div>
-                <div className="text-xs text-muted leading-relaxed">{t.desc}</div>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-muted mt-3">Includes built-in overage fees — customers seamlessly upgrade to the next tier as usage grows.</p>
+          <p className="text-sm text-muted mt-2 leading-relaxed">
+            Enterprises make an annual commit against tiered credit pools — indicatively structured around <strong>Starter</strong>, <strong>Growth</strong>, and <strong>Enterprise</strong> tiers (e.g., ~$250K, ~$500K, ~$1M+), with built-in overage fees enabling seamless upgrades as usage grows.
+          </p>
+          <p className="text-xs text-slate-400 italic mt-2">Exact tier thresholds and breakpoints should be validated through customer and partner research before finalizing.</p>
         </div>
 
         {/* Flexible Credit Usage */}

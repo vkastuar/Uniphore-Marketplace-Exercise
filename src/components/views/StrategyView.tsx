@@ -7,9 +7,10 @@ const scrollTo = (id: string) => {
 
 const tocItems = [
   { id: 'ecosystem', label: 'Fulfilling Ecosystem Needs', desc: 'Why enterprises, SIs, and Uniphore all need this exchange' },
-  { id: 'pros-cons', label: 'Pros, Cons & Success Factors', desc: 'Strategic trade-offs and what must hold true for marketplace success' },
   { id: 'answer', label: 'The Strategic Answer', desc: 'Should Uniphore build? Yes — but phased, starting with SI-Led Exchange' },
+  { id: 'pros-cons', label: 'Pros & Cons', desc: 'Strategic trade-offs of building the marketplace' },
   { id: 'horizons', label: '3-Horizon Execution Plan', desc: 'SI-Led Exchange → ISV Expansion → Open Developer Marketplace' },
+  { id: 'must-hold', label: 'What Must Hold True', desc: 'Six non-negotiable conditions before launch' },
   { id: 'pillars', label: 'Five Platform Strategy Pillars', desc: 'The broader BCAI platform strategy the marketplace sits within' },
 ];
 
@@ -119,12 +120,40 @@ const StrategyView = () => {
         </div>
       </div>
 
-      {/* Pros & Cons + What Must Hold True */}
-      <div id="pros-cons">
-        <h3 className="text-2xl font-bold text-primary mb-2">Pros, Cons & Success Factors</h3>
-        <p className="text-sm text-muted mb-6">Strategic trade-offs of building a marketplace, and six non-negotiable conditions that must hold true before launch.</p>
+      {/* Strategic Answer */}
+      <div id="answer" className="glass-panel p-8">
+        <h3 className="text-xl font-bold text-primary mb-4">Should Uniphore Build a Marketplace? — The Strategic Answer</h3>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="p-5 bg-blue-50 rounded-xl border border-blue-200">
+            <div className="flex items-center gap-2 mb-2">
+              <DollarSign className="text-blue-600" size={20} />
+              <span className="font-bold text-blue-800">Yes — but NOT an open marketplace today.</span>
+            </div>
+            <p className="text-sm text-blue-700 leading-relaxed">Build a marketplace, but in phases. Uniphore currently lacks a bottoms-up developer community. An open marketplace launched now would be an empty store. The answer is a <strong>Curated SI-Led Partner Exchange</strong> first, then expand.</p>
+          </div>
+          <div className="p-5 bg-amber-50 rounded-xl border border-amber-200">
+            <div className="flex items-center gap-2 mb-2">
+              <TrendingUp className="text-amber-700" size={20} />
+              <span className="font-bold text-amber-800">Why now matters: the 2026 inflection point</span>
+            </div>
+            <p className="text-sm text-amber-700 leading-relaxed">By late 2026, Gartner forecasts 40% of enterprise apps will embed AI agents. The SI partners Uniphore relies on are already building vertical assets. Without a marketplace, Uniphore cannot monetize or retain that IP — it just becomes SI billable hours.</p>
+          </div>
+          <div className="p-5 bg-emerald-50 rounded-xl border border-emerald-200">
+            <div className="flex items-center gap-2 mb-2">
+              <Building2 className="text-emerald-700" size={20} />
+              <span className="font-bold text-emerald-800">Recommended timeline: 12–18 months to launch H1</span>
+            </div>
+            <p className="text-sm text-emerald-700 leading-relaxed">Wait until integration debt from acquisitions (Orby, Autonom8, ActionIQ, Infoworks) is cleared and core platform APIs are stable. Then launch the SI-led Partner Exchange as the first horizon.</p>
+          </div>
+        </div>
+      </div>
 
-        <div className="grid-2 mb-5">
+      {/* Pros & Cons */}
+      <div id="pros-cons">
+        <h3 className="text-2xl font-bold text-primary mb-2">Pros & Cons</h3>
+        <p className="text-sm text-muted mb-6">Strategic trade-offs of building the marketplace.</p>
+
+        <div className="grid-2">
           <div className="glass-panel p-6 border-t-4 border-t-emerald-500">
             <div className="flex items-center gap-2 mb-4">
               <CheckCircle2 className="text-emerald-600" size={20} />
@@ -153,53 +182,6 @@ const StrategyView = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-
-        <div className="glass-panel p-8 border-t-4 border-t-amber-500">
-          <div className="flex items-center gap-2 mb-2">
-            <AlertCircle className="text-amber-600" size={20} />
-            <h4 className="font-bold text-primary text-lg">What Must Hold True for Marketplace Success</h4>
-          </div>
-          <p className="text-sm text-muted mb-5">Six non-negotiable conditions before launch — failing any one of these will result in the "empty store" failure mode.</p>
-          <div className="grid grid-cols-3 gap-4">
-            {mustHoldTrue.map((m, i) => (
-              <div key={i} className="bg-amber-50 rounded-xl p-5 border border-amber-100">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-6 h-6 rounded-full bg-amber-200 text-amber-800 text-xs font-black flex items-center justify-center shrink-0">{i + 1}</span>
-                  <span className="font-bold text-sm text-amber-900">{m.label}</span>
-                </div>
-                <p className="text-xs text-amber-800 leading-relaxed">{m.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Strategic Answer */}
-      <div id="answer" className="glass-panel p-8">
-        <h3 className="text-xl font-bold text-primary mb-4">Should Uniphore Build a Marketplace? — The Strategic Answer</h3>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="p-5 bg-blue-50 rounded-xl border border-blue-200">
-            <div className="flex items-center gap-2 mb-2">
-              <DollarSign className="text-blue-600" size={20} />
-              <span className="font-bold text-blue-800">Yes — but NOT an open marketplace today.</span>
-            </div>
-            <p className="text-sm text-blue-700 leading-relaxed">Build a marketplace, but in phases. Uniphore currently lacks a bottoms-up developer community. An open marketplace launched now would be an empty store. The answer is a <strong>Curated SI-Led Partner Exchange</strong> first, then expand.</p>
-          </div>
-          <div className="p-5 bg-amber-50 rounded-xl border border-amber-200">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="text-amber-700" size={20} />
-              <span className="font-bold text-amber-800">Why now matters: the 2026 inflection point</span>
-            </div>
-            <p className="text-sm text-amber-700 leading-relaxed">By late 2026, Gartner forecasts 40% of enterprise apps will embed AI agents. The SI partners Uniphore relies on are already building vertical assets. Without a marketplace, Uniphore cannot monetize or retain that IP — it just becomes SI billable hours.</p>
-          </div>
-          <div className="p-5 bg-emerald-50 rounded-xl border border-emerald-200">
-            <div className="flex items-center gap-2 mb-2">
-              <Building2 className="text-emerald-700" size={20} />
-              <span className="font-bold text-emerald-800">Recommended timeline: 12–18 months to launch H1</span>
-            </div>
-            <p className="text-sm text-emerald-700 leading-relaxed">Wait until integration debt from acquisitions (Orby, Autonom8, ActionIQ, Infoworks) is cleared and core platform APIs are stable. Then launch the SI-led Partner Exchange as the first horizon.</p>
           </div>
         </div>
       </div>
@@ -281,6 +263,26 @@ const StrategyView = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* What Must Hold True */}
+      <div id="must-hold" className="glass-panel p-8 border-t-4 border-t-amber-500">
+        <div className="flex items-center gap-2 mb-2">
+          <AlertCircle className="text-amber-600" size={20} />
+          <h4 className="font-bold text-primary text-lg">What Must Hold True for Marketplace Success</h4>
+        </div>
+        <p className="text-sm text-muted mb-5">Six non-negotiable conditions before launch — failing any one of these will result in the "empty store" failure mode.</p>
+        <div className="grid grid-cols-3 gap-4">
+          {mustHoldTrue.map((m, i) => (
+            <div key={i} className="bg-amber-50 rounded-xl p-5 border border-amber-100">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-6 h-6 rounded-full bg-amber-200 text-amber-800 text-xs font-black flex items-center justify-center shrink-0">{i + 1}</span>
+                <span className="font-bold text-sm text-amber-900">{m.label}</span>
+              </div>
+              <p className="text-xs text-amber-800 leading-relaxed">{m.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
 

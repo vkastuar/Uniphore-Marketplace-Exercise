@@ -35,9 +35,9 @@ function App() {
     { id: 'market', label: 'Market Analysis', icon: BarChart3 },
     { id: 'competitive', label: 'Competitive Analysis', icon: Swords },
     { id: 'strategy', label: 'Marketplace Strategy', icon: Lightbulb },
-    { id: 'mvp', label: 'MVP Definition', icon: Rocket },
     { id: 'gtm', label: 'Marketplace GTM', icon: TrendingUp },
     { id: 'pricing', label: 'Pricing Strategy', icon: DollarSign },
+    { id: 'mvp', label: 'MVP Definition', icon: Rocket },
   ] as const;
 
   const renderView = () => {
@@ -82,12 +82,12 @@ function App() {
         </nav>
         
         <div style={{ marginTop: 'auto', padding: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-           <button 
-             className="primary-button" 
-             style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+           <button
+             className="primary-button"
+             style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontSize: '1rem', fontWeight: 700, padding: '0.75rem 1rem' }}
              onClick={() => setAppMode('marketplace')}
            >
-             <Rocket size={18} />
+             <Rocket size={20} />
              Launch Prototype
            </button>
         </div>

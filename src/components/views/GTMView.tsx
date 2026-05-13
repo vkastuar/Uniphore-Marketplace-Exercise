@@ -6,8 +6,8 @@ const scrollTo = (id: string) => {
 };
 
 const tocItems = [
-  { id: 'land', label: 'Land with Agent Templates', desc: 'Lowest barrier to entry — LOB buyers visualize immediate ROI' },
   { id: 'vertical', label: 'Hyper-Verticalized Approach', desc: 'BFSI, Healthcare, Telecom — localized solutions over generic AI' },
+  { id: 'land', label: 'Land with Agent Templates and Turnkey Agents', desc: 'Lowest barrier to entry — LOB buyers visualize immediate ROI' },
   { id: 'hero', label: 'Strategic Co-Selling & Hero Assets', desc: 'Tier-1 SIs as vanguard; co-funded Hero Assets per vertical' },
   { id: 'align', label: 'Sales, Marketing & CS Alignment', desc: 'Data-driven targeting and guided deployment to the "Aha!" moment' },
   { id: 'expand', label: 'Expand: SLM Factory Upsell', desc: 'Infrastructure squeeze as the trigger for SLM Factory adoption' },
@@ -44,43 +44,14 @@ const GTMView = () => {
         </div>
       </div>
 
-      {/* 1. Land with Agent Templates */}
-      <div id="land" className="glass-panel p-8 border-l-4 border-l-accent-primary">
-        <div className="flex items-start gap-6">
-          <div className="flex flex-col items-center gap-2 shrink-0">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
-              <Layers className="text-accent-primary" size={24} />
-            </div>
-            <span className="text-4xl font-black" style={{ color: '#e2e8f0' }}>01</span>
-          </div>
-          <div className="flex-1">
-            <h3 className="text-xl font-bold text-primary mb-1">Land with Agent Templates</h3>
-            <span className="text-xs font-bold text-accent-primary uppercase tracking-wider">Lowest Barrier to Entry</span>
-            <div className="mt-4 space-y-4">
-              <div>
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">The Rationale</span>
-                <p className="text-sm text-muted leading-relaxed mt-1">Selling the core "Business AI Cloud" or "SLM Factory" requires complex, top-down technical sales cycles. The GTM strategy leads instead with <strong>Agent Templates & BPMN Workflows</strong>. Templates represent the lowest barrier to platform adoption — allowing Line-of-Business (LOB) buyers to immediately visualize a solved problem (e.g., "Automated Employee Onboarding") rather than evaluating abstract infrastructure.</p>
-              </div>
-              <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                <div className="flex items-center gap-2 mb-1">
-                  <ChevronRight className="text-accent-primary" size={16} />
-                  <span className="text-sm font-bold text-accent-primary">The Motion</span>
-                </div>
-                <p className="text-sm text-blue-700 leading-relaxed">Uniphore's composable architecture allows these templates to be deployed quickly, proving immediate ROI and establishing Uniphore's footprint within the enterprise — creating a natural pull toward deeper platform investment.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Hyper-Verticalized Approach */}
+      {/* 1. Hyper-Verticalized Approach */}
       <div id="vertical" className="glass-panel p-8 border-l-4 border-l-emerald-500">
         <div className="flex items-start gap-6">
           <div className="flex flex-col items-center gap-2 shrink-0">
             <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center">
               <Target className="text-emerald-600" size={24} />
             </div>
-            <span className="text-4xl font-black" style={{ color: '#e2e8f0' }}>02</span>
+            <span className="text-4xl font-black" style={{ color: '#e2e8f0' }}>01</span>
           </div>
           <div className="flex-1">
             <h3 className="text-xl font-bold text-primary mb-1">The Hyper-Verticalized Approach</h3>
@@ -101,6 +72,35 @@ const GTMView = () => {
                   <span className="text-sm font-bold text-emerald-700">The Motion</span>
                 </div>
                 <p className="text-sm text-emerald-700 leading-relaxed">Lead with highly specific, localized solutions — e.g., <em>"HIPAA-compliant Claims Processing Agents"</em> rather than generic "AI for healthcare." The more specific the claim, the faster the enterprise buyer can picture the ROI.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Land with Agent Templates and Turnkey Agents */}
+      <div id="land" className="glass-panel p-8 border-l-4 border-l-accent-primary">
+        <div className="flex items-start gap-6">
+          <div className="flex flex-col items-center gap-2 shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
+              <Layers className="text-accent-primary" size={24} />
+            </div>
+            <span className="text-4xl font-black" style={{ color: '#e2e8f0' }}>02</span>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-primary mb-1">Land with Agent Templates and Turnkey Agents</h3>
+            <span className="text-xs font-bold text-accent-primary uppercase tracking-wider">Lowest Barrier to Entry</span>
+            <div className="mt-4 space-y-4">
+              <div>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">The Rationale</span>
+                <p className="text-sm text-muted leading-relaxed mt-1">Selling the core "Business AI Cloud" or "SLM Factory" requires complex, top-down technical sales cycles. The GTM strategy leads instead with <strong>Agents, Agent Templates & BPMN Workflows</strong>. Templates represent the lowest barrier to platform adoption — allowing Line-of-Business (LOB) buyers to immediately visualize a solved problem (e.g., "Automated Employee Onboarding") rather than evaluating abstract infrastructure. Turnkey Agents are designed for rapid deployment, allowing companies to quickly move to production.</p>
+              </div>
+              <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                <div className="flex items-center gap-2 mb-1">
+                  <ChevronRight className="text-accent-primary" size={16} />
+                  <span className="text-sm font-bold text-accent-primary">The Motion</span>
+                </div>
+                <p className="text-sm text-blue-700 leading-relaxed">Uniphore's composable architecture allows these templates to be deployed quickly, proving immediate ROI and establishing Uniphore's footprint within the enterprise — creating a natural pull toward deeper platform investment.</p>
               </div>
             </div>
           </div>

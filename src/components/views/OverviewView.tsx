@@ -73,9 +73,7 @@ const OverviewView = () => {
       <div id="company" className="glass-panel p-8 flex items-start gap-8">
         {/* Logo mark */}
         <div className="shrink-0 flex flex-col items-center gap-2">
-          <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-md" style={{ backgroundColor: 'var(--accent-primary)' }}>
-            <span className="text-white font-black text-3xl" style={{ fontFamily: 'system-ui', letterSpacing: '-1px' }}>U</span>
-          </div>
+          <img src="/uniphore-logo.svg" alt="Uniphore" className="w-16 h-16" />
           <span className="text-xs font-bold text-primary tracking-wide">Uniphore</span>
         </div>
         {/* Text */}

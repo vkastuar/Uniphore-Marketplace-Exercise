@@ -1,4 +1,4 @@
-import { Building2, AppWindow, Code2, Users, Briefcase, Server, DollarSign, TrendingUp, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
+import { Building2, AppWindow, Code2, Users, Briefcase, Server, DollarSign, TrendingUp, CheckCircle2, XCircle, AlertCircle, Store, GitBranch, Cpu, Network, Database, ShieldCheck } from 'lucide-react';
 import './views.css';
 
 const scrollTo = (id: string) => {
@@ -8,32 +8,42 @@ const scrollTo = (id: string) => {
 const tocItems = [
   { id: 'ecosystem', label: 'Fulfilling Ecosystem Needs', desc: 'Why enterprises, SIs, and Uniphore all need this exchange' },
   { id: 'answer', label: 'The Strategic Answer', desc: 'Should Uniphore build? Yes — but phased, starting with SI-Led Exchange' },
-  { id: 'pros-cons', label: 'Pros & Cons', desc: 'Strategic trade-offs of building the marketplace' },
+  { id: 'exchange', label: 'The Exchange: What is Traded?', desc: 'Five deep enterprise asset classes — SLMs, agents, ontologies, connectors, governance' },
   { id: 'horizons', label: '3-Horizon Execution Plan', desc: 'SI-Led Exchange → ISV Expansion → Open Developer Marketplace' },
+  { id: 'pros-cons', label: 'Pros & Cons', desc: 'Strategic trade-offs of building the marketplace' },
   { id: 'must-hold', label: 'What Must Hold True', desc: 'Six non-negotiable conditions before launch' },
-  { id: 'pillars', label: 'Five Platform Strategy Pillars', desc: 'The broader BCAI platform strategy the marketplace sits within' },
 ];
 
-const pillars = [
+const assetTypes = [
   {
-    num: '01', title: 'Install Base Expansion', color: 'border-t-accent-primary',
-    desc: 'Aggressively cross-sell Business AI Cloud to all 2,000+ existing enterprise customers. Leverage existing security clearances and vendor approvals in BFSI and Telecom to eliminate procurement friction. Target CDAOs and IT Architects — not just CCaaS buyers.',
+    icon: Cpu, bg: 'bg-blue-50', border: 'border-blue-100', iconColor: 'text-accent-primary',
+    title: 'Domain-Specific SLMs',
+    tag: 'Highest Value', tagBg: 'bg-blue-100 text-blue-700',
+    desc: 'Pre-trained, fine-tuned Small Language Models for specific verticals (e.g., "European Retail Banking Compliance SLM" built by KPMG). This is the highest-value asset class — directly monetizes the SLM Factory.',
   },
   {
-    num: '02', title: 'Regulated Industry Dominance', color: 'border-t-emerald-500',
-    desc: 'Become the de facto sovereign AI platform for BFSI, Healthcare, Telecom, and Public Sector. These verticals cannot use hyperscaler public cloud AI due to compliance mandates — Uniphore\'s architecture is purpose-built for this constraint.',
+    icon: GitBranch, bg: 'bg-indigo-50', border: 'border-indigo-100', iconColor: 'text-accent-secondary',
+    title: 'Agents & Agent Templates',
+    tag: 'High Value', tagBg: 'bg-indigo-100 text-indigo-700',
+    desc: 'Fully packaged autonomous agents for standardized use cases, alongside pre-configured BPMN workflow templates that require "last mile" SI integration (e.g., "Automated Employee Onboarding").',
   },
   {
-    num: '03', title: 'SLM Factory as a Moat', color: 'border-t-amber-500',
-    desc: 'Position the native SLM Factory as an irreversible competitive moat. As enterprises fine-tune domain-specific models on their proprietary data within Uniphore\'s platform, switching costs become extraordinarily high — creating durable, multi-year account lock-in.',
+    icon: Network, bg: 'bg-fuchsia-50', border: 'border-fuchsia-100', iconColor: 'text-fuchsia-600',
+    title: 'Domain-Specific Knowledge Templates',
+    tag: 'Time-to-Value', tagBg: 'bg-fuchsia-100 text-fuchsia-700',
+    desc: "A curated layer of anonymized, pre-built domain ontologies, entity taxonomies, and knowledge graph templates that accelerate time-to-value. A healthcare customer wouldn't have to build their clinical entity graph from zero — they'd start from the knowledge scaffold and customize it with their proprietary data.",
   },
   {
-    num: '04', title: 'Curated Partner Marketplace', color: 'border-t-indigo-500',
-    desc: 'Build an SI/ISV partner ecosystem via a phased Agent Marketplace. Start with a private SI-led Partner Exchange (Horizon 1), expand to ISVs (Horizon 2), then open to independent developers (Horizon 3) — outsourcing vertical R&D while creating network effects.',
+    icon: Database, bg: 'bg-emerald-50', border: 'border-emerald-100', iconColor: 'text-emerald-600',
+    title: 'Specialized Data Connectors',
+    tag: 'High Growth', tagBg: 'bg-emerald-100 text-emerald-700',
+    desc: "Custom integrations to niche, industry-specific legacy systems (e.g., Epic EMR for healthcare, legacy telecom billing mainframes) that expand beyond Uniphore's first-party 200+ connector library.",
   },
   {
-    num: '05', title: 'Outcome-Driven Sales Motion', color: 'border-t-red-500',
-    desc: 'Shift the narrative from platform features to measurable business outcomes: "Cut back-office processing costs by 60%," "Zero IP leakage risk." Lead with ROI-proven case studies from BFSI/Telecom deployments to shorten enterprise sales cycles.',
+    icon: ShieldCheck, bg: 'bg-amber-50', border: 'border-amber-100', iconColor: 'text-amber-600',
+    title: 'Governance & Guardrail Plugins',
+    tag: 'Compliance Critical', tagBg: 'bg-amber-100 text-amber-700',
+    desc: 'Modular compliance-checking logic blocks slotted into agent pipelines (e.g., a localized PII redaction filter for GDPR in Germany, or a FINRA audit trail block for US trading compliance).',
   },
 ];
 
@@ -148,41 +158,33 @@ const StrategyView = () => {
         </div>
       </div>
 
-      {/* Pros & Cons */}
-      <div id="pros-cons">
-        <h3 className="text-2xl font-bold text-primary mb-2">Pros & Cons</h3>
-        <p className="text-sm text-muted mb-6">Strategic trade-offs of building the marketplace.</p>
-
-        <div className="grid-2">
-          <div className="glass-panel p-6 border-t-4 border-t-emerald-500">
-            <div className="flex items-center gap-2 mb-4">
-              <CheckCircle2 className="text-emerald-600" size={20} />
-              <h4 className="font-bold text-primary">Strategic Benefits</h4>
-            </div>
-            <ul className="space-y-3">
-              {pros.map((p, i) => (
-                <li key={i} className="flex gap-3 text-sm text-slate-700 leading-snug">
-                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="glass-panel p-6 border-t-4 border-t-red-500">
-            <div className="flex items-center gap-2 mb-4">
-              <XCircle className="text-red-500" size={20} />
-              <h4 className="font-bold text-primary">Strategic Risks</h4>
-            </div>
-            <ul className="space-y-3">
-              {cons.map((c, i) => (
-                <li key={i} className="flex gap-3 text-sm text-slate-700 leading-snug">
-                  <span className="w-5 h-5 rounded-full bg-red-100 text-red-700 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* The Exchange: What is Traded? */}
+      <div id="exchange">
+        <div className="flex items-center gap-3 mb-2">
+          <Store className="text-primary" size={26} />
+          <h3 className="text-2xl font-bold text-primary">The Exchange: What is Traded?</h3>
+        </div>
+        <p className="text-md text-muted mb-6 leading-relaxed max-w-4xl">
+          Drawing inspiration from mature enterprise marketplaces like Salesforce AppExchange <span className="text-slate-500">(components, industry templates)</span> and Snowflake Data Cloud <span className="text-slate-500">(data apps, models)</span>, the Uniphore BCAI Marketplace will not host generic "prompt wrappers." It will be an exchange for deep, secure enterprise assets that require professional deployment.
+        </p>
+        <div className="grid grid-cols-2 gap-5">
+          {assetTypes.map((a) => {
+            const Icon = a.icon;
+            return (
+              <div key={a.title} className={`glass-panel p-6 flex items-start gap-4 ${a.bg} border ${a.border}`}>
+                <div className={`p-3 bg-white rounded-xl shrink-0 border ${a.border} shadow-sm`}>
+                  <Icon className={a.iconColor} size={24} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="font-bold text-primary text-base">{a.title}</h4>
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${a.tagBg}`}>{a.tag}</span>
+                  </div>
+                  <p className="text-sm text-muted leading-relaxed">{a.desc}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -266,6 +268,44 @@ const StrategyView = () => {
         </div>
       </div>
 
+      {/* Pros & Cons */}
+      <div id="pros-cons">
+        <h3 className="text-2xl font-bold text-primary mb-2">Pros & Cons</h3>
+        <p className="text-sm text-muted mb-6">Strategic trade-offs of building the marketplace.</p>
+
+        <div className="grid-2">
+          <div className="glass-panel p-6 border-t-4 border-t-emerald-500">
+            <div className="flex items-center gap-2 mb-4">
+              <CheckCircle2 className="text-emerald-600" size={20} />
+              <h4 className="font-bold text-primary">Strategic Benefits</h4>
+            </div>
+            <ul className="space-y-3">
+              {pros.map((p, i) => (
+                <li key={i} className="flex gap-3 text-sm text-slate-700 leading-snug">
+                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="glass-panel p-6 border-t-4 border-t-red-500">
+            <div className="flex items-center gap-2 mb-4">
+              <XCircle className="text-red-500" size={20} />
+              <h4 className="font-bold text-primary">Strategic Risks</h4>
+            </div>
+            <ul className="space-y-3">
+              {cons.map((c, i) => (
+                <li key={i} className="flex gap-3 text-sm text-slate-700 leading-snug">
+                  <span className="w-5 h-5 rounded-full bg-red-100 text-red-700 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* What Must Hold True */}
       <div id="must-hold" className="glass-panel p-8 border-t-4 border-t-amber-500">
         <div className="flex items-center gap-2 mb-2">
@@ -281,30 +321,6 @@ const StrategyView = () => {
                 <span className="font-bold text-sm text-amber-900">{m.label}</span>
               </div>
               <p className="text-xs text-amber-800 leading-relaxed">{m.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Strategic Pillars */}
-      <div id="pillars">
-        <h3 className="text-2xl font-bold text-primary mb-2">Five Platform Strategy Pillars</h3>
-        <p className="text-sm text-muted mb-6">The broader Business AI Cloud strategy that the Marketplace sits within.</p>
-        <div className="grid grid-cols-3 gap-5">
-          {pillars.slice(0, 3).map(p => (
-            <div key={p.num} className={`glass-panel p-6 border-t-4 ${p.color}`}>
-              <div className="text-5xl font-black mb-3" style={{ color: '#e2e8f0' }}>{p.num}</div>
-              <h4 className="font-bold text-primary text-base mb-3">{p.title}</h4>
-              <p className="text-sm text-muted leading-relaxed">{p.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-2 gap-5 mt-5">
-          {pillars.slice(3).map(p => (
-            <div key={p.num} className={`glass-panel p-6 border-t-4 ${p.color}`}>
-              <div className="text-5xl font-black mb-3" style={{ color: '#e2e8f0' }}>{p.num}</div>
-              <h4 className="font-bold text-primary text-base mb-3">{p.title}</h4>
-              <p className="text-sm text-muted leading-relaxed">{p.desc}</p>
             </div>
           ))}
         </div>

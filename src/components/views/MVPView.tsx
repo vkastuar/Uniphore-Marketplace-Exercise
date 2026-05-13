@@ -1,4 +1,4 @@
-import { Database, GitBranch, Cpu, ShieldCheck, Users, Search, LayoutDashboard, Store, CheckCircle2, Circle, Network, CreditCard, BarChart2, Receipt } from 'lucide-react';
+import { Users, Search, LayoutDashboard, CheckCircle2, Circle, CreditCard, BarChart2, Receipt } from 'lucide-react';
 import './views.css';
 
 const scrollTo = (id: string) => {
@@ -6,7 +6,6 @@ const scrollTo = (id: string) => {
 };
 
 const tocItems = [
-  { id: 'exchange', label: 'The Exchange: What is Traded?', desc: 'Five deep enterprise asset classes — SLMs, agents, ontologies, connectors, governance' },
   { id: 'priority', label: 'Feature Priority Matrix', desc: 'Build Now vs. Strategic Bets vs. Defer — Horizon 1 scoping decisions' },
   { id: 'scope', label: 'MVP Feature Scope', desc: 'Demand side, supply side, and host features for Horizon 1' },
   { id: 'billing', label: 'Platform Billing Capabilities', desc: 'Platform Credit API, asset pricing logic engine, and partner rev-share ledger' },
@@ -59,43 +58,6 @@ const priorityMatrix = [
   },
 ];
 
-const assetTypes = [
-  {
-    icon: Cpu, bg: 'bg-blue-50', border: 'border-blue-100', iconColor: 'text-accent-primary',
-    title: 'Domain-Specific SLMs',
-    tag: 'Highest Value',
-    tagBg: 'bg-blue-100 text-blue-700',
-    desc: 'Pre-trained, fine-tuned Small Language Models for specific verticals (e.g., "European Retail Banking Compliance SLM" built by KPMG). This is the highest-value asset class — directly monetizes the SLM Factory.',
-  },
-  {
-    icon: GitBranch, bg: 'bg-indigo-50', border: 'border-indigo-100', iconColor: 'text-accent-secondary',
-    title: 'Agents & Agent Templates',
-    tag: 'High Value',
-    tagBg: 'bg-indigo-100 text-indigo-700',
-    desc: 'Fully packaged autonomous agents for standardized use cases, alongside pre-configured BPMN workflow templates that require "last mile" SI integration (e.g., "Automated Employee Onboarding").',
-  },
-  {
-    icon: Network, bg: 'bg-fuchsia-50', border: 'border-fuchsia-100', iconColor: 'text-fuchsia-600',
-    title: 'Domain-specific knowledge templates',
-    tag: 'Time-to-Value',
-    tagBg: 'bg-fuchsia-100 text-fuchsia-700',
-    desc: 'A curated layer of anonymized, pre-built domain ontologies, entity taxonomies, and knowledge graph templates that accelerate time-to-value. A healthcare customer wouldn\'t have to build their clinical entity graph from zero — they\'d start from the knowledge scaffold and customize it with their proprietary data.',
-  },
-  {
-    icon: Database, bg: 'bg-emerald-50', border: 'border-emerald-100', iconColor: 'text-emerald-600',
-    title: 'Specialized Data Connectors',
-    tag: 'High Growth',
-    tagBg: 'bg-emerald-100 text-emerald-700',
-    desc: 'Custom integrations to niche, industry-specific legacy systems (e.g., Epic EMR for healthcare, legacy telecom billing mainframes) that expand beyond Uniphore\'s first-party 200+ connector library.',
-  },
-  {
-    icon: ShieldCheck, bg: 'bg-amber-50', border: 'border-amber-100', iconColor: 'text-amber-600',
-    title: 'Governance & Guardrail Plugins',
-    tag: 'Compliance Critical',
-    tagBg: 'bg-amber-100 text-amber-700',
-    desc: 'Modular compliance-checking logic blocks slotted into agent pipelines (e.g., a localized PII redaction filter for GDPR in Germany, or a FINRA audit trail block for US trading compliance).',
-  },
-];
 
 const roadmap = [
   {
@@ -174,36 +136,6 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
               </div>
             </button>
           ))}
-        </div>
-      </div>
-
-      {/* What the Exchange Hosts */}
-      <div id="exchange">
-        <div className="flex items-center gap-3 mb-2">
-          <Store className="text-primary" size={26} />
-          <h3 className="text-2xl font-bold text-primary">The Exchange: What is Traded?</h3>
-        </div>
-        <p className="text-md text-muted mb-6 leading-relaxed max-w-4xl">
-          Drawing inspiration from mature enterprise marketplaces like Salesforce AppExchange <span className="text-slate-500">(components, industry templates)</span> and Snowflake Data Cloud <span className="text-slate-500">(data apps, models)</span>, the Uniphore BCAI Marketplace will not host generic "prompt wrappers." It will be an exchange for deep, secure enterprise assets that require professional deployment.
-        </p>
-        <div className="grid grid-cols-2 gap-5">
-          {assetTypes.map((a) => {
-            const Icon = a.icon;
-            return (
-              <div key={a.title} className={`glass-panel p-6 flex items-start gap-4 ${a.bg} border ${a.border}`}>
-                <div className={`p-3 bg-white rounded-xl shrink-0 border ${a.border} shadow-sm`}>
-                  <Icon className={a.iconColor} size={24} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-bold text-primary text-base">{a.title}</h4>
-                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${a.tagBg}`}>{a.tag}</span>
-                  </div>
-                  <p className="text-sm text-muted leading-relaxed">{a.desc}</p>
-                </div>
-              </div>
-            );
-          })}
         </div>
       </div>
 

@@ -8,6 +8,7 @@ import {
   Rocket,
   TrendingUp,
   DollarSign,
+  Route,
 } from 'lucide-react';
 import './App.css';
 
@@ -20,9 +21,10 @@ import StrategyView from './components/views/StrategyView';
 import MVPView from './components/views/MVPView';
 import GTMView from './components/views/GTMView';
 import PricingView from './components/views/PricingView';
+import CustomerJourneyView from './components/views/CustomerJourneyView';
 import MarketplaceApp from './components/marketplace/MarketplaceApp';
 
-type ViewType = 'prompt' | 'overview' | 'market' | 'competitive' | 'strategy' | 'mvp' | 'gtm' | 'pricing';
+type ViewType = 'prompt' | 'overview' | 'market' | 'competitive' | 'strategy' | 'mvp' | 'gtm' | 'pricing' | 'journey';
 type AppMode = 'presentation' | 'marketplace';
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
     { id: 'strategy', label: 'Marketplace Strategy', icon: Lightbulb },
     { id: 'gtm', label: 'Marketplace GTM', icon: TrendingUp },
     { id: 'pricing', label: 'Pricing Strategy', icon: DollarSign },
+    { id: 'journey', label: 'Customer Journey', icon: Route },
     { id: 'mvp', label: 'MVP Definition', icon: Rocket },
   ] as const;
 
@@ -50,6 +53,7 @@ function App() {
       case 'mvp': return <MVPView onLaunchPrototype={() => setAppMode('marketplace')} />;
       case 'gtm': return <GTMView />;
       case 'pricing': return <PricingView />;
+      case 'journey': return <CustomerJourneyView />;
       default: return <PromptView />;
     }
   };

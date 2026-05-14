@@ -1,17 +1,50 @@
-import React, { useState } from 'react';
-import { Search, LogOut, Grid, Cpu, Activity, Database, ShieldAlert, BarChart3, Building2, Phone, BriefcaseMedical, Store, BookOpen } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Search, LogOut, Grid, Cpu, Activity, Database, ShieldAlert, BarChart3,
+  Building2, Phone, BriefcaseMedical, Store, BookOpen, ChevronDown,
+} from 'lucide-react';
 import './marketplace.css';
+import '../auth/auth.css';
 import MarketplaceDashboard from './MarketplaceDashboard';
 import AgentDetailView from './AgentDetailView';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface MarketplaceAppProps {
   onExit: () => void;
 }
 
+const getInitials = (displayName: string | null, email: string | null): string => {
+  if (displayName) return displayName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  return email ? email[0].toUpperCase() : '?';
+};
+
+const getProviderLabel = (providerId: string): string => {
+  if (providerId === 'google.com')   return 'via Google';
+  if (providerId === 'facebook.com') return 'via Facebook';
+  return 'via Email';
+};
+
 const MarketplaceApp: React.FC<MarketplaceAppProps> = ({ onExit }) => {
-  const [activeView, setActiveView] = useState<'dashboard' | 'detail'>('dashboard');
+  const { user, logout } = useAuth();
+  const [activeView, setActiveView]       = useState<'dashboard' | 'detail'>('dashboard');
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeVertical, setActiveVertical] = useState('all-v');
+  const [showDropdown, setShowDropdown]   = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showDropdown) return;
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [showDropdown]);
+
+  const initials     = getInitials(user?.displayName ?? null, user?.email ?? null);
+  const providerLabel = getProviderLabel(user?.providerData[0]?.providerId ?? '');
 
   return (
     <div className="marketplace-container" style={{ animation: 'fadeIn 0.3s ease' }}>
@@ -76,20 +109,44 @@ const MarketplaceApp: React.FC<MarketplaceAppProps> = ({ onExit }) => {
 
       {/* Main Content Area */}
       <main className="mp-main">
+
         {/* Topbar */}
         <div className="mp-topbar">
           <div className="mp-search">
             <Search size={18} color="#94a3b8" />
             <input type="text" placeholder="Search templates, SLMs, partners..." />
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Acme Insurance</div>
-              <div style={{ fontSize: '0.8rem', color: '#2563eb', fontWeight: 700 }}>$1.0M Credit Commit</div>
-            </div>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#1e293b', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
-              AC
-            </div>
+
+          {/* User dropdown */}
+          <div className="auth-topbar-user" ref={dropdownRef}>
+            <button className="auth-topbar-trigger" onClick={() => setShowDropdown(d => !d)} aria-label="Account menu">
+              <div style={{ textAlign: 'right', marginRight: '0.25rem' }}>
+                <div style={{ fontSize: '0.78rem', color: '#0f172a', fontWeight: 600, lineHeight: 1.2 }}>
+                  {user?.displayName ?? user?.email ?? 'Account'}
+                </div>
+                <div style={{ fontSize: '0.7rem', color: '#64748b' }}>{providerLabel}</div>
+              </div>
+              <div className="auth-topbar-avatar">
+                {user?.photoURL
+                  ? <img src={user.photoURL} alt={user.displayName ?? 'User'} referrerPolicy="no-referrer" />
+                  : <span>{initials}</span>
+                }
+              </div>
+              <ChevronDown size={14} className="auth-topbar-chevron" />
+            </button>
+
+            {showDropdown && (
+              <div className="auth-dropdown">
+                <div className="auth-dropdown-header">
+                  <div className="auth-dropdown-name">{user?.displayName ?? 'User'}</div>
+                  <div className="auth-dropdown-email">{user?.email}</div>
+                  <div className="auth-dropdown-provider">{providerLabel}</div>
+                </div>
+                <button className="auth-dropdown-logout" onClick={async () => { setShowDropdown(false); await logout(); }}>
+                  <LogOut size={15} /> Sign out
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

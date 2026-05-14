@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ShieldCheck, Cpu, ArrowRight, Activity, FileText, Database, ShieldAlert,
-  ChevronLeft, ChevronRight, BarChart2, Building2, Calendar, Car, Heart,
+  ChevronLeft, ChevronRight, ChevronDown, ChevronUp, BarChart2, Building2, Calendar, Car, Heart,
   HeartPulse, MessageSquare, Network, Receipt, Search, Settings, Users,
   Zap, BookOpen, FlaskConical, Stethoscope, Scan, Wrench,
 } from 'lucide-react';
@@ -125,9 +125,14 @@ const TYPE_BADGE: Record<string, React.CSSProperties> = {
 const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAgent, activeCategory, activeVertical }) => {
   const [slide, setSlide] = useState(0);
 
+  const [expanded, setExpanded] = useState(false);
+
   const maxSlide = heroAssets.length - 2;
   const prev = () => setSlide(s => Math.max(0, s - 1));
   const next = () => setSlide(s => Math.min(maxSlide, s + 1));
+
+  // Collapse grid whenever filters change
+  useEffect(() => { setExpanded(false); }, [activeCategory, activeVertical]);
 
   const navBtn = (disabled: boolean): React.CSSProperties => ({
     width: '34px', height: '34px', borderRadius: '50%',
@@ -156,6 +161,10 @@ const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAge
 
     return catMatch && vertMatch;
   });
+
+  const VISIBLE_COUNT = 6;
+  const displayedCards = expanded ? filtered : filtered.slice(0, VISIBLE_COUNT);
+  const hasMore = filtered.length > VISIBLE_COUNT;
 
   const isFiltered = activeCategory !== 'all' || activeVertical !== 'all-v';
 
@@ -262,7 +271,7 @@ const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAge
         </div>
       ) : (
         <div className="mp-grid">
-          {filtered.map(t => {
+          {displayedCards.map(t => {
             const Icon = t.icon;
             return (
               <div key={t.id} className="mp-card" onClick={onSelectAgent}>
@@ -274,8 +283,7 @@ const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAge
                     {t.type === 'Premium SLM' ? 'Rev-Share' : '$0'}
                   </div>
                 </div>
-                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0f172a', margin: '0 0 0.2rem 0' }}>{t.title}</h4>
-                <p style={{ color: '#64748b', fontSize: '0.78rem', margin: '0 0 0.5rem 0', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{t.desc}</p>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0f172a', margin: '0 0 0.5rem 0' }}>{t.title}</h4>
                 <p style={{ color: '#64748b', fontSize: '0.78rem', margin: '0 0 0.75rem 0' }}>By <strong style={{ color: '#0f172a' }}>{t.vendor}</strong></p>
                 <div style={{ marginTop: 'auto', display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
                   <span style={{ ...TYPE_BADGE[t.type], fontSize: '0.68rem', fontWeight: 700, padding: '0.2rem 0.55rem', borderRadius: '2rem' }}>{t.type}</span>
@@ -286,6 +294,18 @@ const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAge
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* Expand / collapse toggle */}
+      {hasMore && (
+        <div style={{ textAlign: 'center', margin: '1.5rem 0 0' }}>
+          <button
+            onClick={() => setExpanded(e => !e)}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 600, color: '#2563eb', background: 'white', border: '1px solid #bfdbfe', borderRadius: '2rem', padding: '0.5rem 1.25rem', cursor: 'pointer' }}
+          >
+            {expanded ? <><ChevronUp size={15} /> Show less</> : <><ChevronDown size={15} /> Show all {filtered.length} assets</>}
+          </button>
         </div>
       )}
 

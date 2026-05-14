@@ -73,7 +73,7 @@ const TLDRView = () => {
           </table>
         </div>
         <P><B>Roadmap:</B> M1–3 API stabilization → M4–6 private alpha (KPMG, Cognizant, Rackspace) → M7–12 Horizon 1 launch (target: 10+ certified assets, 5+ enterprise leads/month) → M13–24 ISV and connector expansion.</P>
-        <P style={{ margin: 0 }}>The "Request Deployment" flow (not 1-click self-serve) is intentional — in Horizon 1, the marketplace is a lead-generation engine for SI co-selling, not a transactional store.</P>
+        <P><B>Key Metrics:</B> Focus on <B>Total Platform Credits Consumed by Marketplace Assets</B> (NSM), while monitoring <B>SI Lead-to-Deployment Conversion</B> and <B>Time-to-First-Value (TTFV)</B> as critical guardrails. The "Request Deployment" flow is intentional — in Horizon 1, the marketplace is a lead-generation engine for SI co-selling, not a transactional store.</P>
       </Section>
 
       <Section title="About This Strategy App & Prototype">

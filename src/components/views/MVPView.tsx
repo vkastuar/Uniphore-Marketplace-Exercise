@@ -9,6 +9,7 @@ const tocItems = [
   { id: 'priority', label: 'Feature Priority Matrix', desc: 'Build Now vs. Strategic Bets vs. Defer — Horizon 1 scoping decisions' },
   { id: 'scope', label: 'MVP Feature Scope', desc: 'Demand side, supply side, and host features for Horizon 1' },
   { id: 'billing', label: 'Platform Billing Capabilities', desc: 'Platform Credit API, asset pricing logic engine, and partner rev-share ledger' },
+  { id: 'metrics', label: 'Success & Guardrail Metrics', desc: 'Core KPIs ensuring consumption and platform health' },
   { id: 'roadmap', label: 'Execution Roadmap', desc: 'Phased milestones from API stabilization through Horizon 2 expansion' },
 ];
 
@@ -295,6 +296,36 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
                 <div className="text-xs text-slate-500 font-semibold mt-0.5">Uniphore Platform Fee</div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Success & Guardrail Metrics */}
+      <div id="metrics" className="mb-12 mt-12">
+        <h3 className="text-2xl font-bold text-primary mb-2">Success & Guardrail Metrics</h3>
+        <p className="text-sm text-muted mb-6">Metrics designed for an enterprise, consumption-based marketplace model.</p>
+        
+        <div className="glass-panel p-6 border-t-4 border-t-accent-primary mb-5">
+          <div className="text-xs font-bold uppercase tracking-wider text-accent-primary mb-1">North Star Metric</div>
+          <h4 className="font-bold text-primary text-xl mb-2">Total Platform Credits Consumed by Marketplace Assets</h4>
+          <p className="text-sm text-muted">A vanity metric is "downloads." Real value is only created when an agent or ontology is actually running in production, processing workflows, and burning credits. This aligns Uniphore's revenue, the SI's rev-share, and the customer's ROI.</p>
+        </div>
+
+        <div className="grid grid-cols-3 gap-5">
+          <div className="glass-panel p-5 border-t-4 border-t-emerald-500">
+             <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Guardrail 1 — SI Partner Health</div>
+             <h4 className="font-bold text-primary text-sm mb-2">Lead-to-Deployment Conversion Rate</h4>
+             <p className="text-xs text-muted">% of "Request Deployment" clicks that convert into a live, production SI deployment. If leads don't convert, SIs lose faith in the marketplace as a lead-gen engine and stop contributing assets.</p>
+          </div>
+          <div className="glass-panel p-5 border-t-4 border-t-emerald-500">
+             <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Guardrail 2 — Average Integration Time</div>
+             <h4 className="font-bold text-primary text-sm mb-2">Time-to-First-Value (TTFV)</h4>
+             <p className="text-xs text-muted">Average time from "Request Deployment" to the agent's first successful production transaction. Proves marketplace assets are reducing integration friction — target: 6 months → 4 weeks.</p>
+          </div>
+          <div className="glass-panel p-5 border-t-4 border-t-emerald-500">
+             <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">Guardrail 3 — Asset Quality</div>
+             <h4 className="font-bold text-primary text-sm mb-2">Asset Abandonment Rate</h4>
+             <p className="text-xs text-muted">% of deployed agents/templates that fall to zero credit consumption within 60 days. Guards against low-quality assets that erode enterprise trust through high hallucination rates or broken workflows.</p>
           </div>
         </div>
       </div>

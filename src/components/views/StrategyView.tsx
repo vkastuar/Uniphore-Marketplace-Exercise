@@ -79,7 +79,7 @@ const StrategyView = () => {
     <div className="view-container animate-fade-in">
       <div className="view-header">
         <h2 className="view-title">Marketplace Strategy</h2>
-        <p className="view-subtitle">The strategic imperative for the BCAI Agent Marketplace — why, when, and how to build it in three phased horizons.</p>
+        <p className="view-subtitle">The strategic imperative for the BAIC Agent Marketplace — why, when, and how to build it in three phased horizons.</p>
       </div>
 
       {/* TOC */}
@@ -165,7 +165,7 @@ const StrategyView = () => {
           <h3 className="text-2xl font-bold text-primary">The Exchange: What is Traded?</h3>
         </div>
         <p className="text-md text-muted mb-6 leading-relaxed max-w-4xl">
-          Drawing inspiration from mature enterprise marketplaces like Salesforce AppExchange <span className="text-slate-500">(components, industry templates)</span> and Snowflake Data Cloud <span className="text-slate-500">(data apps, models)</span>, the Uniphore BCAI Marketplace will not host generic "prompt wrappers." It will be an exchange for deep, secure enterprise assets that require professional deployment.
+          Drawing inspiration from mature enterprise marketplaces like Salesforce AppExchange <span className="text-slate-500">(components, industry templates)</span> and Snowflake Data Cloud <span className="text-slate-500">(data apps, models)</span>, the Uniphore BAIC Marketplace will not host generic "prompt wrappers." It will be an exchange for deep, secure enterprise assets that require professional deployment.
         </p>
         <div className="grid grid-cols-2 gap-5">
           {assetTypes.map((a) => {

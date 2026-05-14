@@ -12,6 +12,7 @@ const MarketplaceApp: React.FC<MarketplaceAppProps> = ({ onExit }) => {
   const [activeView, setActiveView] = useState<'dashboard' | 'detail'>('dashboard');
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeVertical, setActiveVertical] = useState('all-v');
+  const [selectedAsset, setSelectedAsset] = useState<{ title: string; vendor: string; type: string; desc: string } | null>(null);
 
   return (
     <div className="marketplace-container" style={{ animation: 'fadeIn 0.3s ease' }}>
@@ -20,7 +21,7 @@ const MarketplaceApp: React.FC<MarketplaceAppProps> = ({ onExit }) => {
       <aside className="mp-sidebar">
         <div className="mp-sidebar-header">
           <Store size={24} color="#2563eb" />
-          <h1>Uniphore BCAI</h1>
+          <h1>Uniphore BAIC</h1>
         </div>
 
         <div className="mp-nav">
@@ -97,12 +98,15 @@ const MarketplaceApp: React.FC<MarketplaceAppProps> = ({ onExit }) => {
         <div className="mp-content">
           {activeView === 'dashboard' ? (
             <MarketplaceDashboard
-              onSelectAgent={() => setActiveView('detail')}
+              onSelectAgent={(asset) => { setSelectedAsset(asset); setActiveView('detail'); }}
               activeCategory={activeCategory}
               activeVertical={activeVertical}
             />
           ) : (
-            <AgentDetailView onBack={() => setActiveView('dashboard')} />
+            <AgentDetailView
+              onBack={() => setActiveView('dashboard')}
+              asset={selectedAsset ?? { title: '', vendor: '', type: '', desc: '' }}
+            />
           )}
         </div>
       </main>

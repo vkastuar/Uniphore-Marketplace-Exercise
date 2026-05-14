@@ -9,7 +9,7 @@ const tocItems = [
   { id: 'company',   label: 'Company Overview',              desc: 'About Uniphore and the Business AI Cloud' },
   { id: 'platform',  label: 'Platform Architecture',         desc: 'Four composable layers enabling sovereign AI' },
   { id: 'state',     label: 'State of the Platform',         desc: 'Current lifecycle phase and developer reality' },
-  { id: 'swot',      label: 'SWOT Analysis',                 desc: 'Competitive position assessment for the BCAI platform' },
+  { id: 'swot',      label: 'SWOT Analysis',                 desc: 'Competitive position assessment for the BAIC platform' },
 ];
 
 const swotData = [

@@ -65,7 +65,7 @@ const GTMView = () => {
     <div className="view-container animate-fade-in">
       <div className="view-header">
         <h2 className="view-title">Marketplace GTM Strategy</h2>
-        <p className="view-subtitle">A phased "Land and Expand" playbook — mirroring the successful GTM motions of modern data platforms like Databricks and Snowflake to drive rapid adoption of the BCAI marketplace.</p>
+        <p className="view-subtitle">A phased "Land and Expand" playbook — mirroring the successful GTM motions of modern data platforms like Databricks and Snowflake to drive rapid adoption of the BAIC marketplace.</p>
       </div>
 
       {/* TOC */}

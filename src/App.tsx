@@ -66,7 +66,7 @@ function App() {
     <div className="app-container">
       <aside className="sidebar">
         <div className="sidebar-header">
-          <h1 className="sidebar-title">Uniphore BCAI</h1>
+          <h1 className="sidebar-title">Uniphore BAIC</h1>
           <p className="sidebar-subtitle">PM Strategy Exercise</p>
         </div>
         <nav className="nav-menu">

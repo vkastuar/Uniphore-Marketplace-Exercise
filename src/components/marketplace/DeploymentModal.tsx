@@ -37,7 +37,7 @@ const DeploymentModal: React.FC<DeploymentModalProps> = ({ onClose }) => {
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '2rem', padding: '1rem', background: '#eff6ff', borderRadius: '0.5rem' }}>
               <ShieldAlert size={20} color="#2563eb" style={{ marginTop: '0.1rem', flexShrink: 0 }} />
               <p style={{ fontSize: '0.85rem', color: '#1e3a8a', margin: 0, lineHeight: 1.5 }}>
-                <strong>Enterprise Integration Required:</strong> This agent connects to sovereign on-prem infrastructure. Deployment will provision your BCAI Sandbox and automatically notify the <strong>Cognizant SI Team</strong> to assist with legacy mainframe routing.
+                <strong>Enterprise Integration Required:</strong> This agent connects to sovereign on-prem infrastructure. Deployment will provision your BAIC Sandbox and automatically notify the <strong>Cognizant SI Team</strong> to assist with legacy mainframe routing.
               </p>
             </div>
 

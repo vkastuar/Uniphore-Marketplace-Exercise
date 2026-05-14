@@ -240,7 +240,7 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
               </div>
               <div className="flex gap-3 text-sm text-muted">
                 <Circle size={16} className="text-slate-300 shrink-0 mt-0.5" />
-                <span className="text-slate-400"><strong>Platform API Stability (Invisible MVP):</strong> The foundational APIs required for an SI's custom agent to dock into a customer's specific BCAI instance securely — the unsexy but critical foundation.</span>
+                <span className="text-slate-400"><strong>Platform API Stability (Invisible MVP):</strong> The foundational APIs required for an SI's custom agent to dock into a customer's specific BAIC instance securely — the unsexy but critical foundation.</span>
               </div>
             </div>
           </div>

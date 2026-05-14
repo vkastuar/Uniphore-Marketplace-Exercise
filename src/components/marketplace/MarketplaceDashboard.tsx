@@ -8,7 +8,7 @@ import {
 import './marketplace.css';
 
 interface MarketplaceDashboardProps {
-  onSelectAgent: () => void;
+  onSelectAgent: (asset: { title: string; vendor: string; type: string; desc: string }) => void;
   activeCategory: string;
   activeVertical: string;
 }
@@ -22,6 +22,9 @@ const heroAssets = [
     title: 'Automate 80% of Inbound Claims.',
     description: 'The Auto-Claims Resolution Agent by Cognizant extracts data from FNOL emails, validates against legacy mainframes, and drafts responses — fully sovereign, zero cloud exposure.',
     builtBy: 'Cognizant',
+    assetTitle: 'Auto-Claims Resolution Agent',
+    assetType: 'Agent Template',
+    assetDesc: 'Investigates, negotiates, and settles insurance claims after an accident. Acts as primary contact for policyholders, determining liability and assessing damages to vehicles and property.',
     gradientFrom: '#1e3a8a',
     gradientTo: '#3b82f6',
   },
@@ -30,6 +33,9 @@ const heroAssets = [
     title: 'Cut KYC Onboarding Time by 70%.',
     description: 'The KYC Onboarding Orchestration Agent by KPMG automates identity verification, document validation, and regulatory screening — reducing manual review overhead.',
     builtBy: 'KPMG',
+    assetTitle: 'KYC Onboarding Orchestration Agent',
+    assetType: 'Agent Template',
+    assetDesc: 'Assembles entity files, reviews source documents, and packages escalations for compliance review.',
     gradientFrom: '#064e3b',
     gradientTo: '#059669',
   },
@@ -38,6 +44,9 @@ const heroAssets = [
     title: 'Resolve Prior Auth in Minutes, Not Days.',
     description: 'The Patient Prior Authorization Agent by Infosys integrates with Epic EMR, structures clinical documentation, and submits to payer portals for instant decisions.',
     builtBy: 'Infosys',
+    assetTitle: 'Patient Prior Authorization Agent',
+    assetType: 'Agent Template',
+    assetDesc: 'Integrates with Epic EMR to structure clinical documentation and submit prior authorization requests to payer portals for fast decisions.',
     gradientFrom: '#3b0764',
     gradientTo: '#7c3aed',
   },
@@ -48,13 +57,13 @@ const templates = [
   { id: 1,  title: 'Valuation Reviewer',              vendor: 'Uniphore',  vertical: 'bfsi',          icon: BarChart2,    type: 'Agent',            color: '#6366f1', bg: '#eef2ff',  desc: 'Checks valuations against comparables, methodology, and the firm\'s review standards.' },
   { id: 2,  title: 'General Ledger Reconciler',        vendor: 'Uniphore',  vertical: 'bfsi',          icon: Receipt,      type: 'Agent',            color: '#0369a1', bg: '#e0f2fe',  desc: 'Reconciles general ledger accounts and runs NAV calculations against books of record.' },
   { id: 3,  title: 'Financial Model Builder',          vendor: 'Uniphore',  vertical: 'bfsi',          icon: Cpu,          type: 'Agent',            color: '#7c3aed', bg: '#f5f3ff',  desc: 'Creates and maintains financial models from filings, data feeds, and analyst inputs.' },
-  { id: 4,  title: 'Market Researcher',                vendor: 'Uniphore',  vertical: 'bfsi',          icon: Search,       type: 'Agent',            color: '#059669', bg: '#ecfdf5',  desc: 'Tracks sector developments, synthesizes news and filings, and flags items for credit review.' },
+  { id: 4,  title: 'Market Researcher',                vendor: 'Uniphore',  vertical: 'bfsi',          icon: Search,       type: 'Agent',            color: '#059669', bg: '#ecfdf5',  desc: 'Tracks sector and issuer developments, synthesizes news, filings, and broker research, and flags items for credit and risk review.' },
   // BFSI — Agent Templates
   { id: 5,  title: 'Lending Agent Template',           vendor: 'KPMG',      vertical: 'bfsi',          icon: Building2,    type: 'Agent Template',   color: '#0176D3', bg: '#eff6ff',  desc: 'Automates the entire borrower journey from applications and collections to back-office work.' },
   { id: 6,  title: 'Month-End Closer Template',        vendor: 'Deloitte',  vertical: 'bfsi',          icon: Calendar,     type: 'Agent Template',   color: '#6d28d9', bg: '#f5f3ff',  desc: 'Runs the close checklist, prepares journal entries, and produces close reports.' },
   { id: 7,  title: 'Statement Auditor Template',       vendor: 'Deloitte',  vertical: 'bfsi',          icon: FileText,     type: 'Agent Template',   color: '#b45309', bg: '#fffbeb',  desc: 'Reviews financial statements for consistency, completeness, and audit-readiness.' },
   { id: 8,  title: 'KYC Screener Template',            vendor: 'KPMG',      vertical: 'bfsi',          icon: ShieldCheck,  type: 'Agent Template',   color: '#10b981', bg: '#ecfdf5',  desc: 'Assembles entity files, reviews source documents, and packages escalations for compliance review.' },
-  { id: 9,  title: 'Auto-Claims Resolution Template',  vendor: 'Cognizant', vertical: 'bfsi',          icon: Car,          type: 'Agent Template',   color: '#dc2626', bg: '#fef2f2',  desc: 'Investigates, negotiates, and settles insurance claims — acting as primary contact for policyholders.' },
+  { id: 9,  title: 'Auto-Claims Resolution Template',  vendor: 'Cognizant', vertical: 'bfsi',          icon: Car,          type: 'Agent Template',   color: '#dc2626', bg: '#fef2f2',  desc: 'Investigates, negotiates, and settles insurance claims after an accident. Acts as primary contact for policyholders, determining liability and assessing damages to vehicles and property.' },
   // BFSI — Knowledge Template
   { id: 10, title: 'BFSI Regulatory Compliance KB',   vendor: 'KPMG',      vertical: 'bfsi',          icon: BookOpen,     type: 'Knowledge Template', color: '#0891b2', bg: '#ecfeff', desc: 'Curated knowledge base covering Basel III, DORA, and APRA compliance frameworks.' },
   // Healthcare — Agents
@@ -65,17 +74,17 @@ const templates = [
   // Healthcare — Agent Templates
   { id: 15, title: 'Patient Onboarding Template',     vendor: 'Cognizant', vertical: 'healthcare',    icon: Users,        type: 'Agent Template',   color: '#0176D3', bg: '#eff6ff',  desc: 'Completes intake processes before patients arrive, streamlining registration and data collection.' },
   { id: 16, title: 'Diagnostic Imaging AI Template',  vendor: 'Infosys',   vertical: 'healthcare',    icon: Scan,         type: 'Agent Template',   color: '#6366f1', bg: '#eef2ff',  desc: 'AI-powered diagnostic imaging analysis and structured reporting for radiology workflows.' },
-  { id: 17, title: 'Chronic Care Management Template',vendor: 'Uniphore',  vertical: 'healthcare',    icon: HeartPulse,   type: 'Agent Template',   color: '#e11d48', bg: '#fff1f2',  desc: 'Monitors device data, provides medication reminders, and offers lifestyle coaching to reduce readmissions.' },
+  { id: 17, title: 'Chronic Care Management Template',vendor: 'Uniphore',  vertical: 'healthcare',    icon: HeartPulse,   type: 'Agent Template',   color: '#e11d48', bg: '#fff1f2',  desc: 'Supports patients with diabetes or heart failure by monitoring device data, providing medication reminders, and offering lifestyle coaching to reduce readmissions.' },
   { id: 18, title: 'HIPAA Compliance Template',       vendor: 'Deloitte',  vertical: 'healthcare',    icon: ShieldCheck,  type: 'Agent Template',   color: '#0284c7', bg: '#f0f9ff',  desc: 'Ensures HIPAA-ready infrastructure and compliance workflows across healthcare operations.' },
   // Healthcare — Knowledge Template
   { id: 19, title: 'Healthcare Coding & Billing KB',  vendor: 'Deloitte',  vertical: 'healthcare',    icon: BookOpen,     type: 'Knowledge Template', color: '#059669', bg: '#ecfdf5', desc: 'ICD-10, CPT codes, and payer-specific billing rules for accurate revenue cycle management.' },
   // Telecom — Agents
-  { id: 20, title: 'CX Improvement Agent',            vendor: 'Cognizant', vertical: 'telecom',       icon: MessageSquare,type: 'Agent',            color: '#7c3aed', bg: '#f5f3ff',  desc: 'Handles complex multi-step customer inquiries with personalized billing explanations and troubleshooting.' },
+  { id: 20, title: 'CX Improvement Agent',            vendor: 'Cognizant', vertical: 'telecom',       icon: MessageSquare,type: 'Agent',            color: '#7c3aed', bg: '#f5f3ff',  desc: 'Handles complex, multi-step customer inquiries, providing personalized billing explanations, plan recommendations, and real-time troubleshooting.' },
   { id: 21, title: 'Marketing Segmentation Agent',    vendor: 'Uniphore',  vertical: 'telecom',       icon: BarChart2,    type: 'Agent',            color: '#f59e0b', bg: '#fffbeb',  desc: 'Segments customers by usage, demographics, and history to initiate tailored campaigns automatically.' },
-  { id: 22, title: 'Autonomous Network Management',   vendor: 'Infosys',   vertical: 'telecom',       icon: Network,      type: 'Agent',            color: '#0369a1', bg: '#e0f2fe',  desc: 'Detects network anomalies, analyzes telemetry, and initiates self-healing protocols to reduce MTTR.' },
+  { id: 22, title: 'Autonomous Network Management',   vendor: 'Infosys',   vertical: 'telecom',       icon: Network,      type: 'Agent',            color: '#0369a1', bg: '#e0f2fe',  desc: 'Detects network anomalies, analyzes telemetry data, and initiates self-healing protocols to resolve service disruptions, reducing Mean Time To Repair (MTTR).' },
   // Telecom — Agent Templates
   { id: 23, title: 'Field Operations Agent Template', vendor: 'KPMG',      vertical: 'telecom',       icon: Wrench,       type: 'Agent Template',   color: '#059669', bg: '#ecfdf5',  desc: 'Optimizes technician schedules, routes tasks by skill set, and provides guided repair procedures.' },
-  { id: 24, title: 'Service Provisioning Template',   vendor: 'Cognizant', vertical: 'telecom',       icon: Zap,          type: 'Agent Template',   color: '#dc2626', bg: '#fef2f2',  desc: 'Automates the quote-to-order process, reducing human intervention in service ordering between operators.' },
+  { id: 24, title: 'Service Provisioning Template',   vendor: 'Cognizant', vertical: 'telecom',       icon: Zap,          type: 'Agent Template',   color: '#dc2626', bg: '#fef2f2',  desc: 'Automates the quote-to-order process, reducing human intervention in service ordering between operators and enterprise customers.' },
   // Telecom — Knowledge Template
   { id: 25, title: 'Telecom Network Topology KB',     vendor: 'Infosys',   vertical: 'telecom',       icon: BookOpen,     type: 'Knowledge Template', color: '#7c3aed', bg: '#f5f3ff', desc: 'Network topology, SLA standards, and 5G infrastructure knowledge for agentic network operations.' },
   // Cross-Industry
@@ -210,7 +219,7 @@ const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAge
           transition: 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
         }}>
           {heroAssets.map((asset, i) => (
-            <div key={i} onClick={onSelectAgent}
+            <div key={i} onClick={() => onSelectAgent({ title: asset.assetTitle, vendor: asset.builtBy, type: asset.assetType, desc: asset.assetDesc })}
               style={{ minWidth: `${CARD_W}px`, height: '210px', background: 'white', borderRadius: '1rem', border: '1px solid #e2e8f0', display: 'flex', overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', cursor: 'pointer' }}
             >
               <div style={{ width: '185px', flexShrink: 0, background: `linear-gradient(160deg, ${asset.gradientFrom} 0%, ${asset.gradientTo} 100%)`, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1rem', overflow: 'hidden' }}>
@@ -274,7 +283,7 @@ const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAge
           {displayedCards.map(t => {
             const Icon = t.icon;
             return (
-              <div key={t.id} className="mp-card" onClick={onSelectAgent}>
+              <div key={t.id} className="mp-card" onClick={() => onSelectAgent({ title: t.title, vendor: t.vendor, type: t.type, desc: t.desc })}>
                 <div className="mp-card-header">
                   <div className="mp-card-icon" style={{ background: t.bg, color: t.color }}>
                     <Icon size={22} />

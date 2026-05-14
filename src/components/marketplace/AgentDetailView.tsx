@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShieldCheck, Database, Cpu, Play, Server, GitBranch, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Database, Cpu, Play, Server, GitBranch, CheckCircle2, Mail } from 'lucide-react';
 import './marketplace.css';
 import DeploymentModal from './DeploymentModal';
 
 interface AgentDetailViewProps {
   onBack: () => void;
+  asset: { title: string; vendor: string; type: string; desc: string };
 }
 
-const AgentDetailView: React.FC<AgentDetailViewProps> = ({ onBack }) => {
+const AgentDetailView: React.FC<AgentDetailViewProps> = ({ onBack, asset }) => {
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
 
+  const isAgent = asset.type === 'Agent';
+  const isAgentTemplate = asset.type === 'Agent Template';
+
+  const aboutHeading =
+    isAgent ? 'About this Agent' :
+    isAgentTemplate ? 'About this Agent Template' :
+    asset.type === 'Premium SLM' ? 'About this SLM' :
+    asset.type === 'Data Connector' ? 'About this Connector' :
+    asset.type === 'Knowledge Template' ? 'About this Knowledge Template' :
+    'About this Asset';
+
   return (
     <div style={{ animation: 'fadeIn 0.3s ease' }}>
-      <button 
+      <button
         onClick={onBack}
         style={{ background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontWeight: 600, cursor: 'pointer', marginBottom: '2rem' }}
       >
@@ -28,35 +40,52 @@ const AgentDetailView: React.FC<AgentDetailViewProps> = ({ onBack }) => {
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
-              <h1 style={{ fontSize: '2rem', fontWeight: 900, color: '#0f172a', margin: 0 }}>Auto-Claims Resolution Agent</h1>
+              <h1 style={{ fontSize: '2rem', fontWeight: 900, color: '#0f172a', margin: 0 }}>{asset.title}</h1>
               <div className="mp-badge verified">
                 <ShieldCheck size={14} />
                 Verified by Uniphore
               </div>
             </div>
             <p style={{ color: '#475569', fontSize: '1.1rem', margin: '0 0 1rem 0' }}>
-              Built by <strong style={{ color: '#0f172a' }}>Cognizant</strong> for BFSI (Insurance)
+              Built by <strong style={{ color: '#0f172a' }}>{asset.vendor}</strong>
             </p>
             <div style={{ display: 'flex', gap: '1rem' }}>
-              <div className="mp-badge price" style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
-                <strong style={{ color: '#16a34a' }}>$0</strong> Template Cost
-              </div>
-              <div className="mp-badge price" style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
-                Uniphore Token Pricing Applies
-              </div>
+              {isAgent ? (
+                <div className="mp-badge price" style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
+                  Contact for price
+                </div>
+              ) : (
+                <>
+                  {isAgentTemplate && (
+                    <div className="mp-badge price" style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
+                      <strong style={{ color: '#16a34a' }}>$0.00</strong> Template Cost
+                    </div>
+                  )}
+                  <div className="mp-badge price" style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
+                    Uniphore Token Pricing Applies
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
-        
+
         <div style={{ display: 'flex', gap: '1rem' }}>
           <button className="mp-btn-primary" style={{ background: '#f1f5f9', color: '#0f172a' }}>
             <Play size={18} />
             View Demo
           </button>
-          <button className="mp-btn-primary" onClick={() => setShowModal(true)}>
-            <Server size={18} />
-            Deploy to Sandbox
-          </button>
+          {isAgent ? (
+            <button className="mp-btn-primary" onClick={() => setShowModal(true)}>
+              <Mail size={18} />
+              Initiate enquiry
+            </button>
+          ) : (
+            <button className="mp-btn-primary" onClick={() => setShowModal(true)}>
+              <Server size={18} />
+              Deploy to Sandbox
+            </button>
+          )}
         </div>
       </div>
 
@@ -70,9 +99,9 @@ const AgentDetailView: React.FC<AgentDetailViewProps> = ({ onBack }) => {
         {activeTab === 'overview' && (
           <div style={{ display: 'flex', gap: '3rem' }}>
             <div style={{ flex: 2 }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a', marginBottom: '1rem' }}>About this Agent</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a', marginBottom: '1rem' }}>{aboutHeading}</h3>
               <p style={{ color: '#475569', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                The Auto-Claims Resolution Agent, architected by Cognizant, automates up to 80% of inbound first-notice-of-loss (FNOL) claims. It extracts unstructured data from claim emails, validates policy coverage against legacy Guidewire/Mainframe systems, and drafts automated resolution responses.
+                {asset.desc}
               </p>
               
               <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#0f172a', marginBottom: '1rem' }}>Key Capabilities</h4>

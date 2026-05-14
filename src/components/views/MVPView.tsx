@@ -106,17 +106,6 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
         <p className="view-subtitle">Architecting the B2B Curated Partner Exchange — Horizon 1 of the Business AI Cloud Marketplace.</p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-4 gap-5">
-        {mvpStats.map(s => (
-          <div key={s.label} className="glass-panel p-6 text-center">
-            <div className="text-2xl font-black text-accent-primary">{s.value}</div>
-            <div className="text-sm font-bold text-primary mt-2">{s.label}</div>
-            <div className="text-xs text-muted mt-1">{s.sub}</div>
-          </div>
-        ))}
-      </div>
-
       {/* TOC */}
       <div className="glass-panel p-8">
         <h3 className="text-base font-bold text-primary uppercase tracking-wider mb-5">On This Page</h3>
@@ -137,6 +126,17 @@ const MVPView = ({ onLaunchPrototype }: MVPViewProps) => {
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-4 gap-5">
+        {mvpStats.map(s => (
+          <div key={s.label} className="glass-panel p-6 text-center">
+            <div className="text-2xl font-black text-accent-primary">{s.value}</div>
+            <div className="text-sm font-bold text-primary mt-2">{s.label}</div>
+            <div className="text-xs text-muted mt-1">{s.sub}</div>
+          </div>
+        ))}
       </div>
 
       {/* Feature Priority Matrix */}

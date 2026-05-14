@@ -82,7 +82,7 @@ const TLDRView = () => {
           <li>The MVP prototype is a UI/UX only prototype.</li>
           <li>It attempts to visualize what the marketplace experience might look like. Not everything in the prototype works — for example, search will not return results.</li>
           <li>Clicking on any asset card takes you to the same flow, which demonstrates the Acme Insurance customer journey.</li>
-          <li>Built with Claude Code in Google's Antigravity.</li>
+          <li>Built with Claude Code in Google Antigravity. Gemini 3.1 Pro for research and strategy, Open 4.6 for building.</li>
         </ol>
       </Section>
     </div>

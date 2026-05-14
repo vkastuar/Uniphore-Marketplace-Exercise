@@ -88,7 +88,7 @@ const CustomerJourneyView = () => {
 
       {/* Journey stages */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        {stages.map((stage, i) => {
+        {stages.map((stage) => {
           const Icon = stage.icon;
           return (
             <div key={stage.id} className="glass-panel" style={{ overflow: 'hidden', borderTop: `4px solid ${stage.color}` }}>

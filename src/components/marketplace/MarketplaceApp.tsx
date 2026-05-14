@@ -26,7 +26,7 @@ const MarketplaceApp: React.FC<MarketplaceAppProps> = ({ onExit }) => {
         <div className="mp-nav">
           <div className="mp-nav-section">
             <div className="mp-nav-title">Discover</div>
-            <div className={`mp-nav-item ${activeCategory === 'all' ? 'active' : ''}`} onClick={() => setActiveCategory('all')}>
+            <div className={`mp-nav-item ${activeCategory === 'all' ? 'active' : ''}`} onClick={() => { setActiveCategory('all'); setActiveView('dashboard'); }}>
               <Grid size={18} /> All Assets
             </div>
             <div className={`mp-nav-item ${activeCategory === 'templates' ? 'active' : ''}`} onClick={() => setActiveCategory('templates')}>

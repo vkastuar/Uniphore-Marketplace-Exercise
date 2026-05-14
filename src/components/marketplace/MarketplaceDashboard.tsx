@@ -289,7 +289,7 @@ const MarketplaceDashboard: React.FC<MarketplaceDashboardProps> = ({ onSelectAge
                     <Icon size={22} />
                   </div>
                   <div className="mp-badge price">
-                    {t.type === 'Premium SLM' ? 'Rev-Share' : '$0'}
+                    {t.type === 'Premium SLM' ? 'Rev-Share' : t.type === 'Agent' ? 'Price Varies' : 'Free'}
                   </div>
                 </div>
                 <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0f172a', margin: '0 0 0.5rem 0' }}>{t.title}</h4>

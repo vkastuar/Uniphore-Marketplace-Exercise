@@ -9,11 +9,13 @@ import {
   TrendingUp,
   DollarSign,
   Route,
+  Zap,
 } from 'lucide-react';
 import './App.css';
 
 // We will import these components later
 import PromptView from './components/views/PromptView';
+import TLDRView from './components/views/TLDRView';
 import OverviewView from './components/views/OverviewView';
 import MarketAnalysisView from './components/views/MarketAnalysisView';
 import CompetitiveAnalysisView from './components/views/CompetitiveAnalysisView';
@@ -24,7 +26,7 @@ import PricingView from './components/views/PricingView';
 import CustomerJourneyView from './components/views/CustomerJourneyView';
 import MarketplaceApp from './components/marketplace/MarketplaceApp';
 
-type ViewType = 'prompt' | 'overview' | 'market' | 'competitive' | 'strategy' | 'mvp' | 'gtm' | 'pricing' | 'journey';
+type ViewType = 'prompt' | 'tldr' | 'overview' | 'market' | 'competitive' | 'strategy' | 'mvp' | 'gtm' | 'pricing' | 'journey';
 type AppMode = 'presentation' | 'marketplace';
 
 function App() {
@@ -33,6 +35,7 @@ function App() {
 
   const navItems = [
     { id: 'prompt', label: 'Exercise Prompt', icon: FileText },
+    { id: 'tldr', label: 'TL;DR', icon: Zap },
     { id: 'overview', label: 'Uniphore Overview', icon: Globe },
     { id: 'market', label: 'Market Analysis', icon: BarChart3 },
     { id: 'competitive', label: 'Competitive Analysis', icon: Swords },
@@ -46,6 +49,7 @@ function App() {
   const renderView = () => {
     switch (activeView) {
       case 'prompt': return <PromptView />;
+      case 'tldr': return <TLDRView />;
       case 'overview': return <OverviewView />;
       case 'market': return <MarketAnalysisView />;
       case 'competitive': return <CompetitiveAnalysisView />;
